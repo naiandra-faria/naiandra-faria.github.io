@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naiandra Madhallena — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #FAF7F0;
+  --cream-dark: #F0EBE0;
+  --pink: #F2B8C0;
+  --pink-deep: #E8909D;
+  --pink-light: #FDE8EC;
+  --yellow: #F0C93A;
+  --yellow-light: #FDF5CC;
+  --marsala: #8B1A2E;
+  --black: #1C1410;
+  --grey: #8A7A6A;
+  --border: rgba(28,20,16,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+.cur {
+  width:20px; height:20px;
+  position:fixed; pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%) rotate(0deg);
+  transition:transform .2s, width .2s, height .2s;
+}
+.cur svg { width:100%; height:100%; }
+.cur .star-fill { fill:var(--marsala); transition:fill .2s; }
+.cur.hover { width:28px; height:28px; transform:translate(-50%,-50%) rotate(45deg); }
+.cur.hover .star-fill { fill:var(--yellow); }
+.cur-ring { width:40px; height:40px; border:1.5px solid var(--pink-deep); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .3s ease; }
+.cur-ring.hover { width:56px; height:56px; border-color:var(--yellow); }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  padding:24px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(250,247,240,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo {
+  font-family:'DM Mono',monospace;
+  font-size:16px; font-weight:500;
+  color:var(--black);
+  text-decoration:none;
+  letter-spacing:.05em;
+}
+
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-family:'DM Mono',monospace;
+  font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--grey); text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--black); }
+
+.lang-toggle {
+  display:flex;
+  border:1.5px solid var(--border);
+  border-radius:100px;
+  overflow:hidden;
+  flex-shrink:0;
+  background:var(--cream);
+}
+.lang-btn {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 16px;
+  background:transparent; border:none;
+  cursor:pointer; color:var(--grey);
+  transition:all .2s;
+}
+.lang-btn.active {
+  background:var(--black);
+  color:var(--cream);
+}
+
+.nav-cta {
+  font-family:'DM Mono',monospace;
+  font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  padding:10px 24px; border-radius:100px;
+  background:var(--marsala); color:#fff;
+  text-decoration:none;
+  transition:background .2s,transform .2s;
+  white-space:nowrap;
+}
+.nav-cta:hover { background:var(--black); transform:translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height:100vh;
+  padding:80px 48px;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:60px;
+  align-items:center;
+}
+
+.hero-tag {
+  font-family:'DM Mono',monospace;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--marsala);
+  margin-bottom:28px;
+  display:flex; align-items:center; gap:10px;
+  white-space:nowrap;
+}
+.hero-tag::before { content:''; width:24px; height:1px; background:var(--marsala); flex-shrink:0; }
+
+.hero-name {
+  font-family:'Fraunces',serif;
+  font-size:clamp(56px,7.5vw,108px);
+  font-weight:900; line-height:.92;
+  letter-spacing:-3px;
+  margin-bottom:32px;
+}
+.hero-name .italic { font-style:italic; color:var(--marsala); }
+
+.hero-desc {
+  font-size:18px; line-height:1.65;
+  color:var(--grey);
+  max-width:480px;
+  margin-bottom:48px;
+  border-left:3px solid var(--pink);
+  padding-left:20px;
+}
+.hero-desc strong { color:var(--black); font-weight:500; }
+
+.hero-actions { display:flex; gap:16px; align-items:center; flex-wrap:nowrap; }
+
+.btn-primary {
+  font-family:'DM Mono',monospace;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+  padding:16px 28px; border-radius:100px;
+  background:var(--marsala); color:#fff;
+  text-decoration:none;
+  transition:all .25s;
+  border:2px solid var(--marsala);
+  white-space:nowrap;
+  display:inline-flex; align-items:center; gap:10px;
+}
+.btn-primary:hover { background:var(--yellow); border-color:var(--yellow); color:var(--black); transform:translateY(-2px); }
+
+.btn-outline {
+  font-family:'DM Mono',monospace;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+  padding:16px 28px; border-radius:100px;
+  background:transparent; color:var(--black);
+  text-decoration:none;
+  border:2px solid var(--black);
+  transition:all .25s;
+  white-space:nowrap;
+  display:inline-flex; align-items:center; gap:10px;
+}
+.btn-outline:hover { background:var(--black); color:var(--cream); }
+
+/* HERO PHOTO */
+.hero-photo-area { position:relative; }
+
+.hero-photo-bg {
+  position:absolute;
+  width:380px; height:460px;
+  background:var(--pink);
+  border-radius:200px 200px 24px 24px;
+  top:20px; left:20px;
+}
+
+.hero-photo-frame {
+  position:relative;
+  width:380px; height:460px;
+  border-radius:200px 200px 24px 24px;
+  overflow:hidden;
+  border:3px solid var(--cream);
+}
+
+.hero-photo {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+}
+
+.hero-photo-placeholder {
+  width:100%; height:100%;
+  background:linear-gradient(160deg,var(--pink-light) 0%,var(--pink) 60%,var(--pink-deep) 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif;
+  font-size:80px; font-weight:900;
+  color:var(--marsala);
+  font-style:italic;
+}
+
+.hero-badge {
+  position:absolute;
+  bottom:-16px; left:-24px;
+  background:var(--yellow);
+  color:var(--black);
+  padding:16px 20px;
+  border-radius:16px;
+  font-family:'DM Mono',monospace;
+  font-size:11px; line-height:1.5;
+  z-index:2;
+  box-shadow:4px 4px 0 var(--black);
+}
+.hero-badge strong { font-family:'Fraunces',serif; font-size:28px; display:block; line-height:1; }
+
+/* MARQUEE */
+.marquee {
+  overflow:hidden;
+  border-top:2px solid var(--black);
+  border-bottom:2px solid var(--black);
+  padding:18px 0;
+  background:var(--yellow);
+}
+.marquee-track {
+  display:inline-flex;
+  align-items:center;
+  animation:marquee 22s linear infinite;
+  white-space:nowrap;
+}
+.marquee-item {
+  font-family:'Fraunces',serif;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  padding:0 40px;
+  color:var(--black);
+  opacity:1;
+  font-style:normal;
+}
+.marquee-star {
+  display:inline-flex;
+  align-items:center;
+  animation:spin-star 4s linear infinite;
+  flex-shrink:0;
+}
+.marquee-star svg { width:24px; height:24px; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ABOUT */
+.about {
+  padding:120px 48px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:stretch;
+  border-bottom:1px solid var(--border);
+}
+
+.about > div {
+  display:flex;
+  flex-direction:column;
+}
+
+.about > div:last-child .tech-card,
+.about > div:last-child > div:last-child {
+  flex:1;
+}
+
+.section-eyebrow {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:24px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-eyebrow::after { content:''; flex:1; max-width:40px; height:1px; background:var(--border); }
+
+.section-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(40px,5vw,64px);
+  font-weight:900; line-height:1;
+  letter-spacing:-1.5px;
+  margin-bottom:32px;
+}
+.section-title .italic { font-style:italic; color:var(--marsala); }
+
+.about-text {
+  font-size:17px; line-height:1.75;
+  color:var(--grey);
+  margin-bottom:20px;
+}
+
+.about-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:48px;
+}
+.stat {
+  background:var(--cream);
+  padding:32px 28px;
+  transition:background .2s;
+}
+.stat:hover { background:var(--pink); }
+.stat:hover .stat-label { color:var(--marsala); }
+.stat-num {
+  font-family:'Fraunces',serif;
+  font-size:52px; font-weight:900; line-height:1;
+  color:var(--marsala);
+  margin-bottom:6px;
+}
+.stat-label {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--grey);
+}
+
+/* TECH CARD STARS */
+@keyframes spin-star { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes float-star {
+  0%,100% { transform:translateY(0) rotate(0deg); }
+  50% { transform:translateY(-8px) rotate(180deg); }
+}
+.star-deco {
+  position:absolute;
+  animation:float-star 3s ease-in-out infinite;
+}
+.star-deco svg { width:100%; height:100%; }
+.star-deco:nth-child(2) { animation-delay:.8s; }
+.star-deco:nth-child(3) { animation-delay:1.6s; }
+
+/* SKILLS */
+.skills-grid { display:flex; flex-direction:column; gap:6px; }
+.skill {
+  display:flex; align-items:center; gap:16px;
+  padding:20px 24px;
+  background:var(--cream-dark);
+  border-radius:12px;
+  transition:all .2s;
+}
+.skill:hover { background:var(--pink-light); transform:translateX(8px); }
+.skill-dot { width:10px; height:10px; border-radius:50%; background:var(--marsala); flex-shrink:0; }
+.skill-name { font-size:15px; font-weight:500; }
+.skill-sub { font-family:'DM Mono',monospace; font-size:11px; color:var(--grey); margin-left:auto; }
+
+/* WORK */
+.work {
+  padding:120px 48px;
+  background:var(--cream-dark);
+  border-bottom:1px solid var(--border);
+}
+
+.work-header {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+  margin-bottom:64px;
+}
+
+.work-header-right {
+  display:flex;
+  flex-wrap:nowrap;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-end;
+  white-space:nowrap;
+}
+
+.tech-pill {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  padding:8px 16px; border-radius:100px;
+  border:1px solid var(--border);
+  color:var(--grey);
+  background:var(--cream);
+  transition:all .2s;
+  white-space:nowrap;
+}
+.tech-pill:hover { background:var(--pink-light); border-color:var(--pink); }
+.tech-pill.active { background:var(--marsala); color:#fff; border-color:var(--marsala); }
+
+/* CARDS 2x2 */
+.cases {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+
+.case-card {
+  background:var(--cream);
+  border-radius:16px;
+  overflow:hidden;
+  border:2px solid transparent;
+  transition:transform .3s, box-shadow .3s, border-color .25s;
+  text-decoration:none;
+  color:var(--black);
+  display:flex;
+  flex-direction:column;
+  outline:1px solid var(--border);
+}
+.case-card:hover {
+  border-color:var(--marsala);
+  outline-color:transparent;
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(139,26,46,0.12);
+}
+.case-card:hover .case-arrow { background:var(--black); }
+
+.case-thumb {
+  height:260px;
+  position:relative;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+
+.thumb-zup { background:linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%); }
+.thumb-ftd { background:linear-gradient(135deg,#0a1a2e,#1a2e50); }
+.thumb-ontruck { background:linear-gradient(135deg,#0a2e1a,#1a5032); }
+.thumb-mob { background:linear-gradient(135deg,#2e1a0a,#503214); }
+
+.thumb-emoji { font-size:64px; opacity:.8; }
+
+.case-info {
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.case-eyebrow {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+.case-eyebrow::before { content:''; width:12px; height:1px; background:var(--grey); }
+
+.case-name {
+  font-family:'Fraunces',serif;
+  font-size:26px; font-weight:700; line-height:1.15;
+  margin-bottom:10px;
+}
+
+.case-desc {
+  font-size:14px; line-height:1.65;
+  color:var(--grey);
+  margin-bottom:20px;
+  flex:1;
+}
+
+.case-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.tag {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.06em;
+  padding:6px 14px; border-radius:100px;
+  border:1px solid var(--border);
+  color:var(--grey);
+}
+.tag.pink-tag { background:var(--pink-light); border-color:var(--pink); color:var(--marsala); }
+
+.case-footer {
+  display:flex;
+  justify-content:flex-end;
+  margin-top:auto;
+}
+
+.case-arrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--cream);
+  background:var(--marsala);
+  padding:10px 20px;
+  border-radius:100px;
+  transition:all .2s;
+}
+.case-card:hover .case-arrow { background:var(--black); }
+
+/* CONTACT */
+.contact {
+  padding:160px 48px;
+  text-align:center;
+  max-width:800px;
+  margin:0 auto;
+}
+
+.contact-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(56px,9vw,112px);
+  font-weight:900; line-height:.92;
+  letter-spacing:-3px;
+  margin-bottom:40px;
+}
+.contact-title .italic { font-style:italic; color:var(--marsala); display:block; }
+.contact-title .outlined {
+  -webkit-text-stroke:2px var(--black);
+  color:transparent;
+}
+
+.contact-sub {
+  font-family:'Fraunces',serif;
+  font-size:20px; font-style:italic;
+  color:var(--grey);
+  margin-bottom:56px;
+  line-height:1.5;
+}
+
+.contact-links { display:flex; gap:16px; justify-content:center; flex-wrap:nowrap; align-items:center; }
+
+/* ART SECTION */
+.art {
+  padding:120px 48px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.art-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:64px;
+}
+
+.art-grid {
+  columns:3;
+  column-gap:20px;
+}
+
+.art-card {
+  break-inside:avoid;
+  margin-bottom:20px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  cursor:none;
+  background:var(--cream-dark);
+}
+
+.art-card img {
+  width:100%;
+  display:block;
+  transition:transform .4s ease;
+}
+
+.art-card:hover img { transform:scale(1.04); }
+
+.art-caption {
+  padding:16px 20px;
+  background:var(--cream);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.art-caption-dot {
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--marsala);
+  flex-shrink:0;
+}
+
+.art-caption-text {
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--grey);
+}
+
+.art-card:hover .art-caption { background:var(--pink-light); }
+.art-card:hover .art-caption-dot { background:var(--pink-deep); }
+.art-card:hover .art-caption-text { color:var(--marsala); }
+
+/* FOOTER */
+footer {
+  padding:32px 48px;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-logo { font-family:'Fraunces',serif; font-size:18px; font-weight:700; }
+.footer-logo span { color:var(--marsala); font-style:italic; }
+.footer-copy {
+  font-family:'DM Mono',monospace;
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--grey);
+}
+
+/* YELLOW WORK BANNER */
+.work-banner {
+  background:var(--yellow);
+  padding:18px 0;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  gap:0;
+  border-top:2px solid var(--black);
+  border-bottom:2px solid var(--black);
+}
+.work-banner-track {
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  animation:marquee 18s linear infinite;
+  white-space:nowrap;
+}
+.work-banner-item {
+  font-family:'Fraunces',serif;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--black);
+  padding:0 40px;
+}
+.work-banner-star {
+  display:inline-flex;
+  align-items:center;
+  animation:spin-star 4s linear infinite;
+  flex-shrink:0;
+}
+.work-banner-star svg { width:28px; height:28px; }
+
+/* SCROLL ANIMATIONS */
+.reveal-left {
+  opacity:0; transform:translateX(-40px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal-left.visible { opacity:1; transform:translateX(0); }
+
+.reveal-right {
+  opacity:0; transform:translateX(40px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal-right.visible { opacity:1; transform:translateX(0); }
+
+.reveal-scale {
+  opacity:0; transform:scale(.92);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal-scale.visible { opacity:1; transform:scale(1); }
+
+.reveal-slow {
+  opacity:0; transform:translateY(40px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+.reveal-slow.visible { opacity:1; transform:translateY(0); }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* DECORATIVE */
+.deco-pill {
+  display:inline-block;
+  background:var(--yellow);
+  color:var(--black);
+  padding:6px 16px;
+  border-radius:100px;
+  font-family:'Fraunces',serif;
+  font-size:14px; font-style:italic;
+  margin-left:12px;
+  vertical-align:middle;
+  transform:rotate(-2deg);
+  display:inline-block;
+}
+
+@media (max-width:768px) {
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; padding:100px 24px 60px; }
+  .hero-photo-area { display:none; }
+  .about { grid-template-columns:1fr; padding:80px 24px; gap:48px; }
+  .work { padding:80px 24px; }
+  .cases { grid-template-columns:1fr; }
+  .case-card.featured { grid-column:span 1; grid-template-columns:1fr; }
+  .case-card.featured .case-thumb { min-height:200px; }
+  .contact { padding:100px 24px; }
+  footer { padding:24px; flex-direction:column; gap:12px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur">
+  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path class="star-fill" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/>
+  </svg>
+</div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">nai.design</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-en="About" data-pt="Sobre">About</a></li>
+    <li><a href="#work" data-en="Work" data-pt="Projetos">Work</a></li>
+    <li><a href="#art" data-en="Art" data-pt="Arte">Art</a></li>
+    <li><a href="#contact" data-en="Contact" data-pt="Contato">Contact</a></li>
+  </ul>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      </div>
+      <a href="mailto:azevedonaiandra@gmail.com" class="nav-cta" data-en="Hire me" data-pt="Contratar">Hire me</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag">Product Designer · Available for freelance</div>
+    <h1 class="hero-name reveal">
+      Naiân<span class="italic">dra</span><br>
+      Madhal<span class="italic">lena</span>
+    </h1>
+    <p class="hero-desc reveal" id="hero-desc" style="transition-delay:.1s">
+      <strong>Psychology × Design.</strong> I build digital products that are intuitive, accessible, and human — with 8+ years of experience across EdTech, FinTech, SaaS and B2C.
+    </p>
+    <div class="hero-actions reveal" style="transition-delay:.2s">
+      <a href="#work" class="btn-primary" id="btn-work">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" style="flex-shrink:0;opacity:.9"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg>
+        See my work
+      </a>
+      <a href="https://wa.me/5534998937137" target="_blank" class="btn-outline" id="btn-talk">
+        Let's talk
+        <svg width="12" height="12" viewBox="0 0 13 13" fill="none" style="flex-shrink:0"><path d="M1.5 11.5L11.5 1.5M11.5 1.5H4.5M11.5 1.5V8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-photo-area reveal" style="transition-delay:.15s">
+    <div class="hero-photo-bg"></div>
+    <div class="hero-photo-frame">
+      <img class="hero-photo" src="photo.jpg" alt="Naiandra Madhallena"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="hero-photo-placeholder" style="display:none">N</div>
+    </div>
+    <div class="hero-badge">
+      <strong>8+</strong>
+      years in design
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Product Design</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Design Systems</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">UX Research</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Figma Expert</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Psychology × Design</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Accessibility WCAG AAA</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">EdTech · FinTech · SaaS</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Product Design</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Design Systems</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">UX Research</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Figma Expert</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Psychology × Design</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">Accessibility WCAG AAA</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="marquee-item">EdTech · FinTech · SaaS</span>
+    <span class="marquee-star"><svg viewBox="0 0 20 20" width="22" height="22"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <div class="section-eyebrow" id="about-eyebrow">Who I am</div>
+    <h2 class="section-title reveal" id="about-title">
+      Psychology<br>meets <span class="italic">Design.</span>
+    </h2>
+    <p class="about-text reveal" id="about-p1">I'm a Product Designer who came from Psychology — and that's not a detail, it's the core of everything I do. Every decision I make is grounded in how humans think, feel, and behave.</p>
+    <p class="about-text reveal" id="about-p2">I work end-to-end: from research and strategy to polished interfaces and scalable design systems. Curious, self-taught, and collaborative by nature.</p>
+    <p class="about-text reveal" id="about-quote"><em>"Art of creating is what moves me. Design is how I dance with the world."</em></p>
+
+    <div class="about-stats reveal">
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Years in design</div></div>
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Digital products</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Industries</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Curiosity</div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-eyebrow">What I do best</div>
+    <div class="skills-grid reveal">
+      <div class="skill"><div class="skill-dot"></div><span class="skill-name">Product Thinking</span><span class="skill-sub">Strategy</span></div>
+      <div class="skill"><div class="skill-dot" style="background:var(--yellow)"></div><span class="skill-name">Design Systems</span><span class="skill-sub">Tokens · Variables</span></div>
+      <div class="skill"><div class="skill-dot" style="background:var(--pink-deep)"></div><span class="skill-name">UX Research</span><span class="skill-sub">Testing · Interviews</span></div>
+      <div class="skill"><div class="skill-dot"></div><span class="skill-name">Accessibility</span><span class="skill-sub">WCAG AAA</span></div>
+      <div class="skill"><div class="skill-dot" style="background:var(--yellow)"></div><span class="skill-name">Figma Expert</span><span class="skill-sub">Advanced · MCP</span></div>
+      <div class="skill"><div class="skill-dot" style="background:var(--pink-deep)"></div><span class="skill-name">Collaboration</span><span class="skill-sub">Cross-functional</span></div>
+    </div>
+
+    <!-- TECH GROOVY CARD -->
+    <div class="tech-card reveal" style="margin-top:16px; background:#2A1A1A; border-radius:12px; padding:32px; position:relative; overflow:hidden; min-height:180px;">
+
+      <!-- Animated stars -->
+      <div class="star-deco" style="top:16px;right:24px;width:24px;height:24px;">
+        <svg viewBox="0 0 20 20"><path fill="#F0C93A" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg>
+      </div>
+      <div class="star-deco" style="bottom:20px;right:60px;width:14px;height:14px;">
+        <svg viewBox="0 0 20 20"><path fill="#F2B8C0" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg>
+      </div>
+      <div class="star-deco" style="top:40px;right:64px;width:10px;height:10px;">
+        <svg viewBox="0 0 20 20"><path fill="rgba(255,255,255,0.3)" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg>
+      </div>
+
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--yellow); margin-bottom:20px;">Current stack</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);">Figma Variables</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);">MCP + Claude</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; background:var(--marsala); color:#fff; border:1px solid var(--marsala);">Design Tokens</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);">WCAG AAA</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; background:var(--yellow); color:var(--black); border:1px solid var(--yellow);">Psychology</span>
+        <span style="font-family:'DM Mono',monospace; font-size:11px; padding:8px 16px; border-radius:100px; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.7);">Prototyping</span>
+      </div>
+    </div>
+
+    <!-- QUOTE CARD -->
+    <div class="reveal" style="margin-top:16px; background:var(--pink-light); border-radius:12px; padding:32px; border:1px solid var(--pink); position:relative; overflow:hidden; flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <div class="star-deco" style="top:16px;right:20px;width:18px;height:18px;">
+        <svg viewBox="0 0 20 20"><path fill="var(--marsala)" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg>
+      </div>
+      <p style="font-family:'Fraunces',serif; font-size:20px; font-style:italic; line-height:1.5; color:var(--marsala); margin-bottom:16px;">"Born in the heart of Brazil's Cerrado, driven by curiosity and the need to create meaningful solutions."</p>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--pink-deep);">Naiandra · Mineira · Designer</div>
+    </div>
+  </div>
+</section>
+
+<!-- YELLOW WORK BANNER -->
+<div class="work-banner">
+  <div class="work-banner-track">
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Selected Work</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Product Design</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Case Studies</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Selected Work</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Product Design</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Case Studies</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Selected Work</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Product Design</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+    <span class="work-banner-item">Case Studies</span>
+    <span class="work-banner-star"><svg viewBox="0 0 20 20"><path fill="#1C1410" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/></svg></span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-header">
+    <div>
+      <div class="section-eyebrow">Selected work</div>
+      <h2 class="section-title reveal" style="white-space:nowrap;">Projects that <span class="italic">matter.</span></h2>
+    </div>
+    <div class="work-header-right reveal">
+      <span class="tech-pill active">All</span>
+      <span class="tech-pill">Design System</span>
+      <span class="tech-pill">UX/UI</span>
+      <span class="tech-pill">FinTech</span>
+      <span class="tech-pill">EdTech</span>
+    </div>
+  </div>
+
+  <div class="cases">
+
+    <!-- FTD — CURRENT, FIRST -->
+    <a class="case-card reveal-left" href="#">
+      <div class="case-thumb thumb-ftd">
+        <span class="thumb-emoji">⚗️</span>
+      </div>
+      <div class="case-info">
+        <div class="case-eyebrow">Current · EdTech · Design System</div>
+        <h3 class="case-name">FTD Educação — Periodic Table</h3>
+        <p class="case-desc">Complete design system with semantic tokens, 14 color primitives at WCAG AAA, and 3 visualization modes for an interactive Periodic Table.</p>
+        <div class="case-tags">
+          <span class="tag pink-tag">Figma Variables</span>
+          <span class="tag">Tokens</span>
+          <span class="tag">WCAG AAA</span>
+        </div>
+        <div class="case-footer">
+          <span class="case-arrow">View case study →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ZUP -->
+    <a class="case-card reveal-right" href="#" style="transition-delay:.1s">
+      <div class="case-thumb thumb-zup">
+        <span class="thumb-emoji">⚡</span>
+      </div>
+      <div class="case-info">
+        <div class="case-eyebrow">FinTech · Social Impact</div>
+        <h3 class="case-name">Zup Innovation × Itaú</h3>
+        <p class="case-desc">Scalable, inclusive solutions across 4 digital products — Coda Mundo and Coda Hub — focused on AI, gamification and digital literacy.</p>
+        <div class="case-tags">
+          <span class="tag pink-tag">Design System</span>
+          <span class="tag">UX/UI</span>
+          <span class="tag">Gamification</span>
+          <span class="tag">AI</span>
+        </div>
+        <div class="case-footer">
+          <span class="case-arrow">View case study →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ONTRUCK -->
+    <a class="case-card reveal-left" href="#" style="transition-delay:.15s">
+      <div class="case-thumb thumb-ontruck">
+        <span class="thumb-emoji">🚚</span>
+      </div>
+      <div class="case-info">
+        <div class="case-eyebrow">Logistics · B2B · SaaS</div>
+        <h3 class="case-name">Ontruck</h3>
+        <p class="case-desc">End-to-end design for a logistics platform connecting carriers and shippers across Europe — simplifying complex freight operations.</p>
+        <div class="case-tags">
+          <span class="tag">UX Research</span>
+          <span class="tag">B2B</span>
+          <span class="tag">SaaS</span>
+        </div>
+        <div class="case-footer">
+          <span class="case-arrow">View case study →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- MOB4PAY -->
+    <a class="case-card reveal-right" href="#" style="transition-delay:.2s">
+      <div class="case-thumb thumb-mob">
+        <span class="thumb-emoji">💳</span>
+      </div>
+      <div class="case-info">
+        <div class="case-eyebrow">FinTech · B2C</div>
+        <h3 class="case-name">Mob4pay</h3>
+        <p class="case-desc">Mobile payment experience focused on simplicity and trust — making financial transactions accessible for everyone.</p>
+        <div class="case-tags">
+          <span class="tag pink-tag">FinTech</span>
+          <span class="tag">Mobile</span>
+          <span class="tag">UX/UI</span>
+        </div>
+        <div class="case-footer">
+          <span class="case-arrow">View case study →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ART -->
+<section class="art" id="art">
+  <div class="art-header">
+    <div>
+      <div class="section-eyebrow">Beyond the screen</div>
+      <h2 class="section-title reveal">Art &amp; <span class="italic">Craft.</span></h2>
+    </div>
+    <p class="reveal" style="font-family:'Fraunces',serif; font-size:18px; font-style:italic; color:var(--grey); max-width:400px; text-align:right; line-height:1.5; transition-delay:.1s; white-space:nowrap;">
+      "Connected with art in so many ways and pixels."
+    </p>
+  </div>
+
+  <div class="art-grid">
+
+    <div class="art-card reveal">
+      <img src="art/imagens 01.png" alt="Porta copos geek" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot"></div>
+        <span class="art-caption-text">Porta copos geek</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.05s">
+      <img src="art/imagens 05.png" alt="Mandala na parede" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot"></div>
+        <span class="art-caption-text">Mandala na parede</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.1s">
+      <img src="art/imagens 07.png" alt="Figgy — mascote Figma" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot" style="background:var(--yellow)"></div>
+        <span class="art-caption-text">Ilustra mascote Figgy</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.15s">
+      <img src="art/imagens 03.png" alt="Pingentes de cerâmica fria" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot"></div>
+        <span class="art-caption-text">Pingentes de cerâmica fria</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.2s">
+      <img src="art/imagens 06.png" alt="Porta óculos girl power" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot" style="background:var(--marsala)"></div>
+        <span class="art-caption-text">Porta óculos girl power</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.25s">
+      <img src="art/imagens 02.png" alt="Telas e árvore de natal felpuda" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot" style="background:var(--yellow)"></div>
+        <span class="art-caption-text">Telas e árvore de natal felpuda</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal" style="transition-delay:.3s">
+      <img src="art/imagens 04.png" alt="Porta óculos galáxia" onerror="this.parentElement.style.background='var(--pink-light)';this.style.display='none'">
+      <div class="art-caption">
+        <div class="art-caption-dot" style="background:var(--pink-deep)"></div>
+        <span class="art-caption-text">Porta óculos galáxia</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-eyebrow" id="contact-eyebrow" style="justify-content:center;margin-bottom:32px">Get in touch</div>
+  <h2 class="contact-title reveal-slow">
+    Let's build
+    <span class="italic">something</span>
+    <span class="outlined">great.</span>
+  </h2>
+  <p class="contact-sub reveal" id="contact-sub" style="margin-bottom:16px">Open for freelance projects, collaborations, and global opportunities.</p>
+  <p class="contact-sub reveal" id="contact-sub2" style="font-size:16px; opacity:.5; margin-bottom:56px">I work in English and Portuguese — let's talk about your next project.</p>
+  <div class="contact-links reveal" style="justify-content:center; max-width:700px; margin:0 auto;">
+    <a href="mailto:azevedonaiandra@gmail.com" class="btn-outline" style="gap:12px; font-size:13px; padding:18px 32px;">
+      <svg width="17" height="17" viewBox="0 0 18 18" fill="none" style="flex-shrink:0"><rect x="1" y="3" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 5l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Email
+    </a>
+    <a href="https://wa.me/5534998937137" target="_blank" class="btn-outline" style="gap:12px; font-size:13px; padding:18px 32px;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.549 4.096 1.512 5.818L.057 23.454a.5.5 0 00.61.61l5.684-1.46A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.518-5.163-1.42l-.37-.22-3.827.983.998-3.75-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+    <a href="https://www.linkedin.com/in/naiandrazevedo/" target="_blank" class="btn-primary" style="gap:12px; font-size:13px; padding:18px 36px;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo" style="font-family:'DM Mono',monospace; font-size:15px; font-weight:500;">nai.design</div>
+  <div class="footer-copy">© 2025 · Designed with soul</div>
+</footer>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cur');
+const ring = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+
+function animRing(){
+  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a,button,.case-card,.skill,.stat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cur.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave',()=>{ cur.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+// REVEAL — all animation types
+const allRevealClasses = ['.reveal', '.reveal-left', '.reveal-right', '.reveal-scale', '.reveal-slow'];
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.08});
+document.querySelectorAll(allRevealClasses.join(',')).forEach(el=>obs.observe(el));
+
+// LANG TOGGLE
+const translations = {
+  en: {
+    'hero-tag': 'Product Designer · Available for freelance',
+    'hero-desc': '<strong>Psychology × Design.</strong> I build digital products that are intuitive, accessible, and human — with 8+ years of experience across EdTech, FinTech, SaaS and B2C.',
+    'btn-work-text': 'See my work',
+    'btn-talk-text': "Let's talk",
+    'about-eyebrow': 'Who I am',
+    'about-title': 'Psychology<br>meets <span class="italic">Design.</span>',
+    'about-p1': "I'm a Product Designer who came from Psychology — and that's not a detail, it's the core of everything I do. Every decision I make is grounded in how humans think, feel, and behave.",
+    'about-p2': 'I work end-to-end: from research and strategy to polished interfaces and scalable design systems. Curious, self-taught, and collaborative by nature.',
+    'about-quote': '<em>"Art of creating is what moves me. Design is how I dance with the world."</em>',
+    'contact-sub': 'Open for freelance projects, collaborations, and global opportunities. I work in English and Portuguese.',
+    'hire-me': 'Hire me',
+    'work-eyebrow': 'Selected work',
+    'skills-eyebrow': 'What I do best',
+  },
+  pt: {
+    'hero-tag': 'Product Designer · Disponível para freelance',
+    'hero-desc': '<strong>Psicologia × Design.</strong> Crio produtos digitais intuitivos, acessíveis e humanos — com 8+ anos de experiência em EdTech, FinTech, SaaS e B2C.',
+    'btn-work-text': 'Ver projetos',
+    'btn-talk-text': 'Vamos conversar',
+    'about-eyebrow': 'Quem eu sou',
+    'about-title': 'Psicologia<br>encontra <span class="italic">Design.</span>',
+    'about-p1': 'Sou Product Designer que veio da Psicologia — e isso não é detalhe, é o núcleo de tudo que faço. Cada decisão que tomo é fundamentada em como as pessoas pensam, sentem e se comportam.',
+    'about-p2': 'Trabalho end-to-end: de pesquisa e estratégia a interfaces refinadas e design systems escaláveis. Curiosa, autodidata e colaborativa por natureza.',
+    'about-quote': '<em>"A arte de criar é o que me move. Design é como eu danço com o mundo."</em>',
+    'contact-sub': 'Aberta para projetos freelance, colaborações e oportunidades globais. Falo inglês e português fluente.',
+    'hire-me': 'Contratar',
+    'work-eyebrow': 'Projetos selecionados',
+    'skills-eyebrow': 'O que faço de melhor',
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn:${lang==='en'?'first':'last'}-child`).classList.add('active');
+
+  const t = translations[lang];
+  const q = (id) => document.getElementById(id);
+
+  // Hero
+  if(q('hero-tag')) q('hero-tag').textContent = t['hero-tag'];
+  if(q('hero-desc')) q('hero-desc').innerHTML = t['hero-desc'];
+
+  // Button primary — keep SVG, change text node
+  const btnWork = q('btn-work');
+  if(btnWork) {
+    const svg = btnWork.querySelector('svg').cloneNode(true);
+    btnWork.innerHTML = '';
+    btnWork.appendChild(svg);
+    btnWork.appendChild(document.createTextNode(' ' + t['btn-work-text']));
+  }
+
+  // Button outline — change text, keep SVG
+  const btnTalk = q('btn-talk');
+  if(btnTalk) {
+    const svg = btnTalk.querySelector('svg').cloneNode(true);
+    btnTalk.innerHTML = '';
+    btnTalk.appendChild(document.createTextNode(t['btn-talk-text'] + ' '));
+    btnTalk.appendChild(svg);
+  }
+
+  // About section
+  if(q('about-eyebrow')) q('about-eyebrow').textContent = t['about-eyebrow'];
+  if(q('about-title')) q('about-title').innerHTML = t['about-title'];
+  if(q('about-p1')) q('about-p1').textContent = t['about-p1'];
+  if(q('about-p2')) q('about-p2').textContent = t['about-p2'];
+  if(q('about-quote')) q('about-quote').innerHTML = t['about-quote'];
+
+  // Contact
+  const contactSub = document.getElementById('contact-sub');
+  if(contactSub) contactSub.textContent = lang === 'en'
+    ? 'Open for freelance projects, collaborations, and global opportunities.'
+    : 'Aberta para projetos freelance, colaborações e oportunidades globais.';
+
+  const contactSub2 = document.getElementById('contact-sub2');
+  if(contactSub2) contactSub2.textContent = lang === 'en'
+    ? 'I work in English and Portuguese — let\'s talk about your next project.'
+    : 'Falo inglês e português fluente — bora conversar sobre seu próximo projeto.';
+
+  const contactEyebrow = document.getElementById('contact-eyebrow');
+  if(contactEyebrow) contactEyebrow.textContent = lang === 'en' ? 'Get in touch' : 'Bora conversar';
+
+  // Nav hire me
+  const navCta = document.querySelector('.nav-cta');
+  if(navCta) navCta.textContent = t['hire-me'];
+
+  // Nav links via data attributes
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if(el.dataset[lang]) el.textContent = el.dataset[lang];
+  });
+}
+</script>
+</body>
+</html>
