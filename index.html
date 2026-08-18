@@ -557,14 +557,6 @@ nav {
   position:relative;
   cursor:none;
   background:var(--cream-dark);
-  transition:transform .3s ease, box-shadow .3s ease;
-  z-index:1;
-}
-
-.art-card.is-active {
-  transform:scale(1.1);
-  z-index:20;
-  box-shadow:0 0 0 2px rgba(139,26,46,0.5), 0 16px 40px rgba(28,20,16,0.25);
 }
 
 .art-card img {
@@ -1216,13 +1208,6 @@ const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:.08});
 document.querySelectorAll(allRevealClasses.join(',')).forEach(el=>obs.observe(el));
-
-// ART CARD CLICK STATE
-document.querySelectorAll('.art-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    card.classList.toggle('is-active');
-  });
-});
 
 // LANG TOGGLE
 const translations = {
