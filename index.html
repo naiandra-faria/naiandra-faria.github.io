@@ -567,6 +567,11 @@ nav {
 
 .art-card:hover img { transform:scale(1.04); }
 
+.art-card img.is-active {
+  transform:scale(1.1);
+  box-shadow:inset 0 0 0 2px rgba(139,26,46,0.5);
+}
+
 .art-caption {
   padding:16px 20px;
   background:var(--cream);
@@ -1208,6 +1213,14 @@ const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:.08});
 document.querySelectorAll(allRevealClasses.join(',')).forEach(el=>obs.observe(el));
+
+// ART CARD CLICK STATE
+document.querySelectorAll('.art-card').forEach(card=>{
+  const img = card.querySelector('img');
+  card.addEventListener('click', ()=>{
+    img.classList.toggle('is-active');
+  });
+});
 
 // LANG TOGGLE
 const translations = {
