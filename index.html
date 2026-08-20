@@ -33,9 +33,9 @@
     <div ref="{{ ringRef }}" style="width:30px; height:30px; border:1.5px solid #F0C93A; border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s ease, height .3s ease, border-color .3s ease"></div>
   </sc-if>
 
-  <nav style="position:sticky; top:20px; z-index:500; margin:20px auto 0; width:fit-content; max-width:calc(100% - 48px); padding:14px 14px 14px 28px; display:flex; justify-content:center; align-items:center; gap:36px; background:rgba(250,247,240,0.88); backdrop-filter:blur(16px); border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; box-shadow:0 12px 40px rgba(139,26,46,0.08)">
+  <nav style="position:sticky; top:20px; z-index:500; margin:20px auto 0; width:fit-content; max-width:calc(100% - 32px); padding:14px 14px 14px 28px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px 36px; background:rgba(250,247,240,0.88); backdrop-filter:blur(16px); border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; box-shadow:0 12px 40px rgba(139,26,46,0.08)">
     <a href="#" style="font-family:'DM Mono',monospace; font-size:16px; font-weight:500; color:#1C1410; text-decoration:none; letter-spacing:.05em">nai.design</a>
-    <ul style="display:flex; gap:34px; list-style:none; margin:0; padding:0; align-items:center">
+    <ul style="display:flex; flex-wrap:wrap; gap:16px 34px; list-style:none; margin:0; padding:0; align-items:center; justify-content:center">
       <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
         <li style="position:relative">
           <span style="position:absolute; bottom:-28px; left:-4px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.06em; padding:2px 6px; border-radius:3px; background:#8B1A2E; color:#FAF7F0; white-space:nowrap; pointer-events:none; transition:opacity .2s, transform .2s; opacity:{{ n.on }}; transform:{{ n.tagShift }}">{{ n.tag }}</span>
@@ -60,8 +60,8 @@
     </div>
   </nav>
 
-  <section data-nav-section="home" style="min-height:100vh; padding:80px 48px; display:grid; grid-template-columns:1fr 420px; gap:60px; align-items:center">
-    <div>
+  <section data-nav-section="home" style="min-height:100vh; padding:clamp(60px,10vw,80px) clamp(20px,5vw,48px); display:flex; flex-wrap:wrap; gap:48px; align-items:center">
+    <div style="flex:1 1 420px; min-width:280px">
       <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8B1A2E; margin-bottom:28px; display:flex; align-items:center; gap:10px; white-space:nowrap">
         <span style="width:24px; height:1px; background:#8B1A2E; flex-shrink:0; display:block"></span>{{ hero.tag }}
       </div>
@@ -72,7 +72,7 @@
       <p data-reveal="up" data-reveal-delay=".1s" style="font-size:18px; line-height:1.65; color:#8A7A6A; max-width:480px; margin:0 0 48px; border-left:3px solid #F2B8C0; padding-left:20px">
         <strong style="color:#1C1410; font-weight:500">{{ hero.descStrong }}</strong> {{ hero.descRest }}
       </p>
-      <div data-reveal="up" data-reveal-delay=".2s" style="display:flex; gap:16px; align-items:center; flex-wrap:nowrap">
+      <div data-reveal="up" data-reveal-delay=".2s" style="display:flex; gap:16px; align-items:center; flex-wrap:wrap">
         <a href="#work" style="font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:16px 28px; border-radius:100px; background:#8B1A2E; color:#fff; text-decoration:none; transition:all .25s; border:2px solid #8B1A2E; white-space:nowrap; display:inline-flex; align-items:center; gap:10px" style-hover="background:#F0C93A; border-color:#F0C93A; color:#1C1410; transform:translateY(-2px)">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" style="flex-shrink:0; opacity:.9"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"></path></svg>
           {{ hero.btnWork }}
@@ -84,12 +84,12 @@
       </div>
     </div>
 
-    <div data-reveal="up" data-reveal-delay=".15s" style="position:relative">
+    <div data-reveal="up" data-reveal-delay=".15s" style="position:relative; flex:1 1 340px; min-width:260px; max-width:380px; margin:0 auto">
       <div aria-hidden="true" style="position:absolute; top:-60px; bottom:-60px; right:-40px; left:-260px; z-index:0; overflow:hidden; border-radius:200px; filter:blur(70px) saturate(1.3); opacity:.5; pointer-events:none; mask-image:radial-gradient(closest-side, black 60%, transparent 100%); -webkit-mask-image:radial-gradient(closest-side, black 60%, transparent 100%)">
         <img src="hero-photo.jpg" alt="" style="width:100%; height:100%; object-fit:cover; object-position:center top">
       </div>
-      <div style="position:absolute; width:380px; height:460px; background:#F2B8C0; border-radius:200px 200px 24px 24px; top:20px; left:20px; z-index:1"></div>
-      <div style="position:relative; z-index:2; width:380px; height:460px; border-radius:200px 200px 24px 24px; overflow:hidden; border:3px solid #FAF7F0">
+      <div style="position:absolute; width:100%; aspect-ratio:380/460; background:#F2B8C0; border-radius:200px 200px 24px 24px; top:20px; left:20px; z-index:1"></div>
+      <div style="position:relative; z-index:2; width:100%; aspect-ratio:380/460; border-radius:200px 200px 24px 24px; overflow:hidden; border:3px solid #FAF7F0">
         <img src="hero-photo.jpg" alt="Naiandra Madhallena" style="width:100%; height:100%; object-fit:cover; object-position:center top">
       </div>
       <div style="position:absolute; bottom:-16px; left:-24px; background:#F0C93A; color:#1C1410; padding:16px 20px; border-radius:16px; font-family:'DM Mono',monospace; font-size:11px; line-height:1.5; z-index:2; box-shadow:4px 4px 0 #1C1410">
@@ -113,8 +113,8 @@
     </div>
   </div>
 
-  <section id="about" data-nav-section="about" style="padding:120px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:stretch; border-bottom:1px solid rgba(28,20,16,0.1)">
-    <div style="display:flex; flex-direction:column">
+  <section id="about" data-nav-section="about" style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,48px); display:flex; flex-wrap:wrap; gap:56px; align-items:stretch; border-bottom:1px solid rgba(28,20,16,0.1)">
+    <div style="display:flex; flex-direction:column; flex:1 1 420px; min-width:280px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:24px; display:flex; align-items:center; gap:12px">
         {{ about.eyebrow }}<span style="flex:1; max-width:40px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
       </div>
@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <div style="display:flex; flex-direction:column">
+    <div style="display:flex; flex-direction:column; flex:1 1 420px; min-width:280px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:24px; display:flex; align-items:center; gap:12px">
         {{ about.skillsEyebrow }}<span style="flex:1; max-width:40px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
       </div>
@@ -180,14 +180,14 @@
     </div>
   </section>
 
-  <section style="padding:0 48px 120px">
-    <a href="design-system.html" data-reveal="up" style="display:flex; align-items:center; gap:40px; background:#FAF7F0; border:2px solid #1C1410; border-radius:16px; padding:32px 36px; text-decoration:none; color:#1C1410; transition:transform .3s, box-shadow .3s, background .25s" style-hover="background:#FDE8EC; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12); color:#1C1410">
+  <section style="padding:0 clamp(20px,5vw,48px) 120px">
+    <a href="design-system.html" data-reveal="up" style="display:flex; flex-wrap:wrap; align-items:center; gap:24px 40px; background:#FAF7F0; border:2px solid #1C1410; border-radius:16px; padding:32px 36px; text-decoration:none; color:#1C1410; transition:transform .3s, box-shadow .3s, background .25s" style-hover="background:#FDE8EC; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12); color:#1C1410">
       <div style="display:flex; gap:6px; flex-shrink:0">
         <span style="width:22px; height:44px; border-radius:22px 22px 4px 4px; background:#8B1A2E; display:block"></span>
         <span style="width:22px; height:44px; border-radius:22px 22px 4px 4px; background:#F0C93A; display:block"></span>
         <span style="width:22px; height:44px; border-radius:22px 22px 4px 4px; background:#F2B8C0; display:block"></span>
       </div>
-      <div style="flex:1">
+      <div style="flex:1 1 220px; min-width:220px">
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8B1A2E; margin-bottom:10px">{{ system.eyebrow }}</div>
         <div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; line-height:1.15; margin-bottom:8px">{{ system.title }}</div>
         <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8A7A6A">12 primitives · 3 typefaces · 40+ tokens · WCAG AAA</div>
@@ -213,15 +213,15 @@
     </div>
   </div>
 
-  <section id="work" data-nav-section="work" style="padding:120px 48px; background:#F0EBE0; border-bottom:1px solid rgba(28,20,16,0.1)">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-bottom:64px">
-      <div>
+  <section id="work" data-nav-section="work" style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,48px); background:#F0EBE0; border-bottom:1px solid rgba(28,20,16,0.1)">
+    <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:center; margin-bottom:64px">
+      <div style="flex:1 1 300px; min-width:260px">
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:24px; display:flex; align-items:center; gap:12px">
           {{ work.eyebrow }}<span style="flex:1; max-width:40px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
         </div>
-        <h2 data-reveal="up" style="font-family:'Fraunces',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1; letter-spacing:-1.5px; margin:0; white-space:nowrap">{{ work.title1 }} <span style="font-style:italic; color:#8B1A2E">{{ work.title2 }}</span></h2>
+        <h2 data-reveal="up" style="font-family:'Fraunces',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1; letter-spacing:-1.5px; margin:0">{{ work.title1 }} <span style="font-style:italic; color:#8B1A2E">{{ work.title2 }}</span></h2>
       </div>
-      <div data-reveal="up" style="display:flex; flex-wrap:nowrap; gap:8px; align-items:center; justify-content:flex-end; white-space:nowrap">
+      <div data-reveal="up" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:flex-end; flex:1 1 260px; min-width:220px">
         <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:8px 16px; border-radius:100px; background:#8B1A2E; color:#fff; border:1px solid #8B1A2E; white-space:nowrap">{{ work.filterAll }}</span>
         <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:8px 16px; border-radius:100px; border:1px solid rgba(28,20,16,0.1); color:#8A7A6A; background:#FAF7F0; transition:all .2s; white-space:nowrap" style-hover="background:#FDE8EC; border-color:#F2B8C0">Design System</span>
         <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:8px 16px; border-radius:100px; border:1px solid rgba(28,20,16,0.1); color:#8A7A6A; background:#FAF7F0; transition:all .2s; white-space:nowrap" style-hover="background:#FDE8EC; border-color:#F2B8C0">UX/UI</span>
@@ -230,7 +230,7 @@
       </div>
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px">
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
         <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
           <div style="height:260px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:{{ c.thumb }}">
@@ -256,18 +256,18 @@
     </div>
   </section>
 
-  <section id="art" data-nav-section="art" style="padding:120px 48px; border-top:1px solid rgba(28,20,16,0.1); border-bottom:1px solid rgba(28,20,16,0.1)">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:64px">
+  <section id="art" data-nav-section="art" style="padding:clamp(60px,10vw,120px) clamp(20px,5vw,48px); border-top:1px solid rgba(28,20,16,0.1); border-bottom:1px solid rgba(28,20,16,0.1)">
+    <div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center; margin-bottom:64px">
       <div>
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:24px; display:flex; align-items:center; gap:12px">
           {{ art.eyebrow }}<span style="flex:1; max-width:40px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
         </div>
         <h2 data-reveal="up" style="font-family:'Fraunces',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1; letter-spacing:-1.5px; margin:0">{{ art.title1 }} <span style="font-style:italic; color:#8B1A2E">{{ art.title2 }}</span></h2>
       </div>
-      <p data-reveal="up" data-reveal-delay=".1s" style="font-family:'Fraunces',serif; font-size:18px; font-style:italic; color:#8A7A6A; max-width:400px; text-align:right; line-height:1.5; white-space:nowrap; margin:0">{{ art.quote }}</p>
+      <p data-reveal="up" data-reveal-delay=".1s" style="font-family:'Fraunces',serif; font-size:18px; font-style:italic; color:#8A7A6A; max-width:400px; text-align:right; line-height:1.5; margin:0">{{ art.quote }}</p>
     </div>
 
-    <div style="columns:4; column-gap:14px">
+    <div style="columns:4 200px; column-gap:14px">
       <sc-for list="{{ artItems }}" as="a" hint-placeholder-count="8">
         <div data-reveal="up" onMouseEnter="{{ a.enter }}" onMouseLeave="{{ a.leave }}" style="break-inside:avoid; margin-bottom:20px; border-radius:16px; overflow:hidden; position:relative; background:#F0EBE0">
           <div style="overflow:hidden">
@@ -284,16 +284,16 @@
 
   
 
-  <section id="contact" data-nav-section="contact" style="padding: 160px 48px; text-align: center; max-width: 800px; margin: 0 auto; position: relative">
+  <section id="contact" data-nav-section="contact" style="padding: clamp(80px,14vw,160px) clamp(20px,5vw,48px); text-align: center; max-width: 800px; margin: 0 auto; position: relative">
     <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:32px; display:flex; align-items:center; gap:12px; justify-content:center">{{ contact.eyebrow }}</div>
-    <h2 data-reveal="slow" style="font-family: 'Fraunces',serif; font-size: clamp(56px,9vw,112px); font-weight: 900; line-height: .92; letter-spacing: -3px; margin: 0 0 40px; width: 766px; height: 218px">
+    <h2 data-reveal="slow" style="font-family: 'Fraunces',serif; font-size: clamp(56px,9vw,112px); font-weight: 900; line-height: .92; letter-spacing: -3px; margin: 0 0 40px">
       {{ contact.title1 }}
-      <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; overflow: hidden"><span style="font-style: italic; color: #8B1A2E; display: block; position: static; height: 123px">{{ contact.title2 }}</span><span style="-webkit-text-stroke: 2px #1C1410; color: transparent; width: 279px; height: 129px">{{ contact.title3 }}</span></div>
+      <div style="box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: center; flex-direction: row; gap: 12px"><span style="font-style: italic; color: #8B1A2E; display: block">{{ contact.title2 }}</span><span style="-webkit-text-stroke: 2px #1C1410; color: transparent">{{ contact.title3 }}</span></div>
       
     </h2>
     <p data-reveal="up" style="font-family:'Fraunces',serif; font-size:20px; font-style:italic; color:#8A7A6A; line-height:1.5; margin:0 0 16px">{{ contact.sub }}</p>
     <p data-reveal="up" style="font-family:'Fraunces',serif; font-size:16px; font-style:italic; color:#8A7A6A; opacity:.5; line-height:1.5; margin:0 0 56px">{{ contact.sub2 }}</p>
-    <div data-reveal="up" style="display:flex; gap:16px; justify-content:center; flex-wrap:nowrap; align-items:center; max-width:700px; margin:0 auto">
+    <div data-reveal="up" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; align-items:center; max-width:700px; margin:0 auto">
       <a href="mailto:azevedonaiandra@gmail.com" style="font-family:'DM Mono',monospace; font-size:13px; letter-spacing:.1em; text-transform:uppercase; padding:18px 32px; border-radius:100px; background:transparent; color:#1C1410; text-decoration:none; border:2px solid #1C1410; transition:all .25s; white-space:nowrap; display:inline-flex; align-items:center; gap:12px" style-hover="background:#1C1410; color:#FAF7F0">
         <svg width="17" height="17" viewBox="0 0 18 18" fill="none" style="flex-shrink:0"><rect x="1" y="3" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"></rect><path d="M1 5l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
         Email
@@ -307,7 +307,7 @@
         LinkedIn
       </a>
     </div>
-</section><footer style="padding:32px 48px; border-top:1px solid rgba(28,20,16,0.1); display:flex; justify-content:space-between; align-items:center">
+</section><footer style="padding:32px clamp(20px,5vw,48px); border-top:1px solid rgba(28,20,16,0.1); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center">
     <div style="font-family:'DM Mono',monospace; font-size:15px; font-weight:500">nai.design</div>
     <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#8A7A6A">© 2025 · Designed with soul</div>
   </footer>
@@ -519,7 +519,7 @@ class Component extends DCLogic {
       { id: 'work', href: '#work', label: t.nav.work, tag: '03 · work' },
       { id: 'art', href: '#art', label: t.nav.art, tag: '04 · art' },
       { id: 'contact', href: '#contact', label: t.nav.contact, tag: '05 · contact' },
-      { id: 'resume', href: 'resume.pdf', label: t.nav.resume, tag: 'pdf · download', download: 'Naiandra-Madhallena-Resume.pdf' }
+      { id: 'resume', href: lang === 'en' ? 'resume-en.pdf' : 'resume-pt.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'en' ? 'Naiandra-Madhallena-Resume-EN.pdf' : 'Naiandra-Madhallena-Currículo-PT.pdf' }
     ];
     return {
       navItems: navDefs.map((n) => ({

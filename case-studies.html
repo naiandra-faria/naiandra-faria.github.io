@@ -31,9 +31,9 @@
     <div ref="{{ ringRef }}" style="width:30px; height:30px; border:1.5px solid #F0C93A; border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%)"></div>
   </sc-if>
 
-  <nav style="position:sticky; top:20px; z-index:500; margin:20px auto 0; width:fit-content; max-width:calc(100% - 48px); padding:14px 14px 14px 28px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px 36px; background:rgba(250,247,240,0.88); backdrop-filter:blur(16px); border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; box-shadow:0 12px 40px rgba(139,26,46,0.08)">
+  <nav style="position:sticky; top:20px; z-index:500; margin:20px auto 0; width:fit-content; max-width:calc(100% - 32px); padding:14px 14px 14px 28px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px 36px; background:rgba(250,247,240,0.88); backdrop-filter:blur(16px); border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; box-shadow:0 12px 40px rgba(139,26,46,0.08)">
     <a href="index.html" style="font-family:'DM Mono',monospace; font-size:16px; font-weight:500; color:#1C1410; text-decoration:none; letter-spacing:.05em">nai.design</a>
-    <ul style="display:flex; flex-wrap:wrap; gap:16px 34px; list-style:none; margin:0; padding:0; align-items:center">
+    <ul style="display:flex; flex-wrap:wrap; gap:16px 34px; justify-content:center; list-style:none; margin:0; padding:0; align-items:center">
       <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
         <li style="position:relative">
           <span style="position:absolute; bottom:-28px; left:-4px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.06em; padding:2px 6px; border-radius:3px; background:#8B1A2E; color:#FAF7F0; white-space:nowrap; pointer-events:none; transition:opacity .2s, transform .2s; opacity:{{ n.on }}; transform:{{ n.tagShift }}">{{ n.tag }}</span>
@@ -58,7 +58,7 @@
     </div>
   </nav>
 
-  <div style="max-width:1180px; margin:0 auto; padding:64px 48px 0; display:flex; align-items:center; gap:20px; flex-wrap:wrap">
+  <div style="max-width:1180px; margin:0 auto; padding:64px clamp(20px,5vw,48px) 0; display:flex; align-items:center; gap:20px; flex-wrap:wrap">
     <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A">{{ ui.switchLabel }}</span>
     <span style="flex:1; min-width:20px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
     <div style="display:flex; gap:10px; flex-wrap:wrap">
@@ -68,14 +68,14 @@
     </div>
   </div>
 
-  <section style="max-width:1180px; margin:0 auto; padding:56px 48px 80px">
+  <section style="max-width:1180px; margin:0 auto; padding:56px clamp(20px,5vw,48px) 80px">
     <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8B1A2E; margin-bottom:26px; display:flex; align-items:center; gap:10px">
       <span style="width:24px; height:1px; background:#8B1A2E; display:block"></span>{{ c.eyebrow }}
     </div>
     <h1 style="font-family:'Fraunces',serif; font-size:76px; font-weight:900; line-height:.98; letter-spacing:-0.03em; margin:0 0 24px; max-width:16ch; text-wrap:pretty">{{ c.title }}</h1>
     <p style="font-family:'Outfit',sans-serif; font-size:22px; font-weight:300; line-height:1.55; color:#5C4F45; max-width:62ch; margin:0 0 48px; text-wrap:pretty">{{ c.subtitle }}</p>
 
-    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(28,20,16,0.1); border:1px solid rgba(28,20,16,0.1)">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1px; background:rgba(28,20,16,0.1); border:1px solid rgba(28,20,16,0.1)">
       <sc-for list="{{ c.meta }}" as="m" hint-placeholder-count="4">
         <div style="background:#FAF7F0; padding:24px 22px">
           <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6A; margin-bottom:10px">{{ m.k }}</div>
@@ -85,10 +85,10 @@
     </div>
   </section>
 
-  <section style="background:#1C1410; padding:88px 48px">
+  <section style="background:#1C1410; padding:88px clamp(20px,5vw,48px)">
     <div style="max-width:1180px; margin:0 auto">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#F0C93A; margin-bottom:44px">{{ ui.resultLabel }}</div>
-      <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px">
         <sc-for list="{{ c.results }}" as="r" hint-placeholder-count="3">
           <div style="border-top:2px solid rgba(240,201,58,.4); padding-top:22px; display:flex; flex-direction:column; gap:12px">
             <div style="display:flex; align-items:baseline; gap:10px">
@@ -103,8 +103,8 @@
     </div>
   </section>
 
-  <section style="max-width:1180px; margin:0 auto; padding:104px 48px; display:grid; grid-template-columns:320px 1fr; gap:64px; align-items:start">
-    <div>
+  <section style="max-width:1180px; margin:0 auto; padding:104px clamp(20px,5vw,48px); display:flex; flex-wrap:wrap; gap:32px 64px; align-items:start">
+    <div style="flex:1 1 280px; min-width:240px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:18px">{{ ui.problemLabel }}</div>
       <div style="font-family:'Fraunces',serif; font-size:34px; font-weight:700; line-height:1.1; letter-spacing:-0.02em">{{ c.problem.title }}</div>
     </div>
@@ -121,13 +121,13 @@
     </div>
   </section>
 
-  <section style="max-width:1180px; margin:0 auto; padding:0 48px 104px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start">
-    <div>
+  <section style="max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,48px) 104px; display:flex; flex-wrap:wrap; gap:32px 64px; align-items:start">
+    <div style="flex:1 1 300px; min-width:260px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:18px">{{ ui.roleLabel }}</div>
       <div style="font-family:'Fraunces',serif; font-size:28px; font-weight:700; line-height:1.15; margin-bottom:20px">{{ c.role.title }}</div>
       <p style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:300; line-height:1.7; color:#3C332C; margin:0; text-wrap:pretty">{{ c.role.body }}</p>
     </div>
-    <div>
+    <div style="flex:1 1 300px; min-width:260px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:18px">{{ ui.constraintsLabel }}</div>
       <div style="display:flex; flex-direction:column; gap:1px; background:rgba(28,20,16,0.1); border:1px solid rgba(28,20,16,0.1)">
         <sc-for list="{{ c.role.constraints }}" as="k" hint-placeholder-count="4">
@@ -140,14 +140,14 @@
     </div>
   </section>
 
-  <section style="background:#F2EDE2; padding:104px 48px">
+  <section style="background:#F2EDE2; padding:104px clamp(20px,5vw,48px)">
     <div style="max-width:1180px; margin:0 auto">
       <div style="display:flex; align-items:baseline; gap:24px; margin-bottom:48px; flex-wrap:wrap">
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A">{{ ui.researchLabel }}</div>
         <div style="font-family:'Fraunces',serif; font-size:34px; font-weight:700; line-height:1.1; letter-spacing:-0.02em">{{ c.research.title }}</div>
       </div>
       <p style="font-family:'Outfit',sans-serif; font-size:19px; font-weight:300; line-height:1.7; color:#3C332C; margin:0 0 44px; max-width:70ch; text-wrap:pretty">{{ c.research.body }}</p>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px">
         <sc-for list="{{ c.research.items }}" as="it" hint-placeholder-count="3">
           <div style="background:#FAF7F0; padding:30px 26px; border-radius:14px; border:1px solid rgba(28,20,16,0.08)">
             <div style="width:28px; height:28px; margin-bottom:18px">
@@ -161,18 +161,18 @@
     </div>
   </section>
 
-  <section style="max-width:1180px; margin:0 auto; padding:104px 48px">
+  <section style="max-width:1180px; margin:0 auto; padding:104px clamp(20px,5vw,48px)">
     <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:18px">{{ ui.decisionsLabel }}</div>
     <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:900; line-height:1.05; letter-spacing:-0.02em; margin-bottom:56px; max-width:22ch">{{ ui.decisionsTitle }}</div>
     <div style="display:flex; flex-direction:column; gap:1px; background:rgba(28,20,16,0.1); border:1px solid rgba(28,20,16,0.1)">
       <sc-for list="{{ c.decisions }}" as="d" hint-placeholder-count="4">
-        <div style="background:#FAF7F0; padding:38px 34px; display:grid; grid-template-columns:64px 1fr 1fr; gap:34px; align-items:start; transition:background .25s" style-hover="background:#FFFDF7">
-          <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:900; color:#F2B8C0; line-height:1">{{ d.n }}</div>
-          <div>
+        <div style="background:#FAF7F0; padding:38px clamp(20px,4vw,34px); display:flex; flex-wrap:wrap; gap:16px 34px; align-items:start; transition:background .25s" style-hover="background:#FFFDF7">
+          <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:900; color:#F2B8C0; line-height:1; flex:0 0 auto">{{ d.n }}</div>
+          <div style="flex:1 1 260px; min-width:220px">
             <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:700; line-height:1.2; margin-bottom:12px">{{ d.title }}</div>
             <div style="font-family:'Outfit',sans-serif; font-size:16px; font-weight:300; line-height:1.65; color:#5C4F45">{{ d.why }}</div>
           </div>
-          <div style="border-left:2px solid #F0C93A; padding-left:22px">
+          <div style="border-left:2px solid #F0C93A; padding-left:22px; flex:1 1 220px; min-width:200px">
             <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6A; margin-bottom:10px">{{ ui.effectLabel }}</div>
             <div style="font-family:'Outfit',sans-serif; font-size:16px; line-height:1.6; color:#1C1410">{{ d.effect }}</div>
           </div>
@@ -181,16 +181,14 @@
     </div>
   </section>
 
-  <section style="max-width:1180px; margin:0 auto; padding:0 48px 104px">
+  <section style="max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,48px) 104px">
     <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:32px">{{ ui.galleryLabel }}</div>
 
     <sc-if value="{{ hasSwitcher }}" hint-placeholder-val="{{ false }}">
       <figure style="margin:0 0 24px; background:#FAF7F0; border:1px solid rgba(28,20,16,0.1); border-radius:14px; overflow:hidden">
         <div style="position:relative; width:100%; aspect-ratio:1508/1008; background:#0F1724">
           <sc-for list="{{ mockLayers }}" as="ml" hint-placeholder-count="0">
-            <sc-if value="{{ ml.src }}">
-              <img src="{{ ml.src }}" alt="{{ ml.label }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transition:opacity .45s ease; opacity:{{ ml.opacity }}">
-            </sc-if>
+            <img ref="{{ ml.setRef }}" alt="{{ ml.label }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transition:opacity .45s ease; opacity:{{ ml.opacity }}">
           </sc-for>
         </div>
         <figcaption style="padding:14px 22px; border-top:1px solid rgba(28,20,16,0.1); display:flex; align-items:center; gap:18px; flex-wrap:wrap">
@@ -205,15 +203,15 @@
       </figure>
     </sc-if>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px">
       <sc-for list="{{ c.gallery }}" as="g" hint-placeholder-count="0">
         <figure style="margin:0; background:#FAF7F0; border:1px solid rgba(28,20,16,0.1); border-radius:14px; overflow:hidden; grid-column:{{ g.span }}">
           <div style="background:{{ g.bg }}; padding:{{ g.pad }}; display:flex; align-items:center; justify-content:center; min-height:{{ g.minH }}">
-            <sc-if value="{{ g.src }}">
-              <img src="{{ g.src }}" alt="{{ g.cap }}" style="max-width:100%; max-height:520px; display:block; object-fit:contain">
+            <sc-if value="{{ g.isImg }}" hint-placeholder-val="{{ false }}">
+              <img ref="{{ g.setRef }}" alt="{{ g.cap }}" style="max-width:100%; max-height:520px; display:block; object-fit:contain">
             </sc-if>
-            <sc-if value="{{ g.vid }}">
-              <video src="{{ g.vid }}" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" style="width:100%; height:auto; display:block"></video>
+            <sc-if value="{{ g.isVid }}" hint-placeholder-val="{{ false }}">
+              <video ref="{{ g.setRef }}" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" style="width:100%; height:auto; display:block"></video>
             </sc-if>
           </div>
           <figcaption style="padding:18px 22px; border-top:1px solid rgba(28,20,16,0.1); display:flex; gap:12px; align-items:baseline">
@@ -225,14 +223,14 @@
     </div>
   </section>
 
-  <section style="background:#8B1A2E; padding:104px 48px; position:relative; overflow:hidden">
+  <section style="background:#8B1A2E; padding:104px clamp(20px,5vw,48px); position:relative; overflow:hidden">
     <div style="position:absolute; top:-40px; right:-40px; width:220px; height:220px; opacity:.12; animation:nai-spin 26s linear infinite">
       <svg viewBox="0 0 20 20" style="width:100%; height:100%"><path fill="#FAF7F0" d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"></path></svg>
     </div>
     <div style="max-width:1180px; margin:0 auto; position:relative">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#F2B8C0; margin-bottom:20px">{{ ui.impactLabel }}</div>
       <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:900; line-height:1.1; color:#FAF7F0; margin-bottom:48px; max-width:24ch">{{ c.impact.title }}</div>
-      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:28px 56px">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px 56px">
         <sc-for list="{{ c.impact.bullets }}" as="ib" hint-placeholder-count="4">
           <div style="display:flex; gap:16px; align-items:flex-start; border-top:1px solid rgba(250,247,240,.2); padding-top:20px">
             <span style="font-family:'DM Mono',monospace; font-size:11px; color:#F0C93A; flex-shrink:0">{{ ib.n }}</span>
@@ -243,14 +241,14 @@
     </div>
   </section>
 
-  <section style="max-width:1180px; margin:0 auto; padding:104px 48px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start">
-    <div>
+  <section style="max-width:1180px; margin:0 auto; padding:104px clamp(20px,5vw,48px); display:flex; flex-wrap:wrap; gap:32px 64px; align-items:start">
+    <div style="flex:1 1 380px; min-width:280px">
       <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:18px">{{ ui.learningLabel }}</div>
       <p style="font-family:'Fraunces',serif; font-size:26px; font-style:italic; font-weight:300; line-height:1.5; color:#8B1A2E; margin:0 0 20px; text-wrap:pretty">{{ c.learning.quote }}</p>
       <p style="font-family:'Outfit',sans-serif; font-size:17px; font-weight:300; line-height:1.7; color:#3C332C; margin:0; text-wrap:pretty">{{ c.learning.body }}</p>
     </div>
     <sc-if value="{{ showTodos }}" hint-placeholder-val="{{ true }}">
-      <div style="background:#FFF9E6; border:1.5px dashed #F0C93A; border-radius:14px; padding:32px 30px">
+      <div style="background:#FFF9E6; border:1.5px dashed #F0C93A; border-radius:14px; padding:32px 30px; flex:1 1 320px; min-width:260px">
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8B1A2E; margin-bottom:8px">{{ ui.todoLabel }}</div>
         <div style="font-family:'Outfit',sans-serif; font-size:15px; line-height:1.6; color:#5C4F45; margin-bottom:22px">{{ ui.todoNote }}</div>
         <div style="display:flex; flex-direction:column; gap:12px">
@@ -265,7 +263,7 @@
     </sc-if>
   </section>
 
-  <section style="border-top:1px solid rgba(28,20,16,0.1); padding:72px 48px 120px">
+  <section style="border-top:1px solid rgba(28,20,16,0.1); padding:72px clamp(20px,5vw,48px) 120px">
     <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap">
       <a href="index.html" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#8A7A6A; display:inline-flex; align-items:center; gap:10px" style-hover="color:#1C1410">← {{ ui.back }}</a>
       <button onClick="{{ nextCase }}" style="font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:18px 32px; border-radius:100px; border:none; background:#1C1410; color:#FAF7F0; cursor:none; display:inline-flex; align-items:center; gap:12px; transition:background .2s" style-hover="background:#8B1A2E">{{ ui.nextCase }} · {{ nextLabel }} →</button>
@@ -686,7 +684,7 @@ class Component extends DCLogic {
       { id: 'work', href: 'index.html#work', label: t.nav.work, tag: '03 · work' },
       { id: 'art', href: 'index.html#art', label: t.nav.art, tag: '04 · art' },
       { id: 'contact', href: 'index.html#contact', label: t.nav.contact, tag: '05 · contact' },
-      { id: 'resume', href: 'resume.pdf', label: t.nav.resume, tag: 'pdf · download', download: 'Naiandra-Madhallena-Resume.pdf' }
+      { id: 'resume', href: lang === 'en' ? 'resume-en.pdf' : 'resume-pt.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'en' ? 'Naiandra-Madhallena-Resume-EN.pdf' : 'Naiandra-Madhallena-Currículo-PT.pdf' }
     ];
     const other = cid === 'ftd' ? 'zup' : 'ftd';
     return {
@@ -715,7 +713,9 @@ class Component extends DCLogic {
         return Object.assign({}, base, {
           gallery: base.gallery.map((g) => Object.assign({}, g, {
             pad: g.vid ? '0' : '26px',
-            minH: g.vid ? 'auto' : '260px'
+            minH: g.vid ? 'auto' : '260px',
+            isImg: !!g.src, isVid: !!g.vid,
+            setRef: (el) => { if (!el) return; if (g.src) el.src = g.src; else if (g.vid) el.src = g.vid; }
           }))
         });
       })(),
@@ -729,7 +729,8 @@ class Component extends DCLogic {
       hasSwitcher: !!(t.cases[cid] && t.cases[cid].mocks),
       mockCaption: ((t.cases[cid] || {}).mocks || {}).caption || '',
       mockLayers: (((t.cases[cid] || {}).mocks || {}).layers || []).map((l, i) => ({
-        src: l.src, label: l.label, opacity: i === this.state.mock ? 1 : 0
+        label: l.label, opacity: i === this.state.mock ? 1 : 0,
+        setRef: (el) => { if (el && l.src) el.src = l.src; }
       })),
       mockTabs: (((t.cases[cid] || {}).mocks || {}).layers || []).map((l, i) => ({
         label: l.label,
