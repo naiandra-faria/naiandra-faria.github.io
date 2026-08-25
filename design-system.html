@@ -35,28 +35,15 @@
     <nav style="width:fit-content; max-width:100%; padding:14px 14px 14px 28px; display:flex; flex-wrap:wrap; align-items:center; gap:16px 36px; background:rgba(250,247,240,0.88); backdrop-filter:blur(16px); border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; box-shadow:0 12px 40px rgba(139,26,46,0.08)">
       <a href="index.html" style="font-family:'DM Mono',monospace; font-size:16px; font-weight:500; color:#1C1410; letter-spacing:.05em; flex-shrink:0">nai.design</a>
       <ul style="display:flex; flex-wrap:wrap; gap:16px 34px; list-style:none; margin:0; padding:0; align-items:center">
-        <li><a href="index.html#about" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; transition:color .2s" style-hover="color:#1C1410">{{ t.nav.about }}</a></li>
-        <li style="position:relative">
-          <span style="position:absolute; bottom:-28px; left:-4px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.06em; padding:2px 6px; border-radius:3px; background:#8B1A2E; color:#FAF7F0; white-space:nowrap; pointer-events:none">02 · system</span>
-          <span style="position:relative; display:inline-block; padding:4px 2px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#1C1410">
-            <span style="position:absolute; left:-4px; right:-4px; bottom:1px; height:9px; border-radius:2px; background:#F0C93A; transform:rotate(-1.5deg); z-index:0; pointer-events:none"></span>
-            <span style="position:relative; z-index:1">Design System</span>
-            <span style="position:absolute; top:-10px; left:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E"></span>
-            <span style="position:absolute; top:-10px; right:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E"></span>
-            <span style="position:absolute; bottom:-10px; left:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E"></span>
-            <span style="position:absolute; bottom:-10px; right:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E"></span>
-          </span>
-        </li>
-        <li><a href="index.html#work" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; transition:color .2s" style-hover="color:#1C1410">{{ t.nav.work }}</a></li>
-        <li><a href="index.html#art" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; transition:color .2s" style-hover="color:#1C1410">{{ t.nav.art }}</a></li>
-        <li><a href="index.html#contact" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; transition:color .2s" style-hover="color:#1C1410">{{ t.nav.contact }}</a></li>
-        <li><a href="{{ resumeHref }}" download="{{ resumeName }}" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; transition:color .2s" style-hover="color:#1C1410">{{ t.nav.resume }}</a></li>
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <dc-import name="NavItem" label="{{ n.label }}" href="{{ n.href }}" download="{{ n.download }}" active="{{ n.active }}" hint-size="90px,20px"></dc-import>
+        </sc-for>
       </ul>
       <div style="display:flex; gap:16px; align-items:center">
         <div style="display:flex; border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; overflow:hidden; flex-shrink:0; background:#FAF7F0">
-          <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">EN</button>
-          <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">ES</button>
-          <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">PT</button>
+          <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">{{ enLabel }}</button>
+          <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">{{ esLabel }}</button>
+          <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">{{ ptLabel }}</button>
         </div>
         <a href="mailto:azevedonaiandra@gmail.com" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:10px 24px; border-radius:100px; background:#8B1A2E; color:#fff; white-space:nowrap; flex-shrink:0; transition:background .2s, transform .2s" style-hover="background:#1C1410; color:#fff; transform:translateY(-1px)">{{ t.nav.hire }}</a>
       </div>
@@ -318,7 +305,7 @@
           <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; padding:6px 14px; border-radius:100px; border:1px solid rgba(28,20,16,0.1); color:#8A7A6A">{{ t.comp.tagDefault }}</span>
         </div>
         <div style="display:flex; border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; overflow:hidden; width:fit-content; background:#FAF7F0">
-          <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; background:#1C1410; color:#FAF7F0">EN</span>
+          <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; background:#1C1410; color:#FAF7F0">🇬🇧 EN</span>
           <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; color:#8A7A6A">ES</span>
           <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; color:#8A7A6A">PT</span>
         </div>
@@ -361,6 +348,22 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div style="grid-column:1 / -1; background:#FAF7F0; border-radius:16px; padding:32px; border:1px solid rgba(28,20,16,0.1)">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8B1A2E; margin-bottom:24px">{{ t.comp.navItem }}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:48px 56px; align-items:flex-start; margin-bottom:28px">
+          <sc-for list="{{ navSpecs }}" as="ns" hint-placeholder-count="3">
+            <div style="display:flex; flex-direction:column; gap:20px">
+              <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#8A7A6A">{{ ns.state }}</div>
+              <ul style="margin:0; padding:0; list-style:none; display:flex">
+                <dc-import name="NavItem" label="{{ ns.label }}" href="{{ ns.href }}" active="{{ ns.active }}" force-hover="{{ ns.forceHover }}" hint-size="90px,20px"></dc-import>
+              </ul>
+              <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.04em; color:#8A7A6A; line-height:1.6; max-width:24ch">{{ ns.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; color:#8A7A6A; line-height:1.7; border-top:1px solid rgba(28,20,16,0.1); padding-top:20px">{{ t.comp.navNote }}</div>
       </div>
 
       <div style="grid-column:1 / -1; background:#FAF7F0; border-radius:16px; padding:32px; border:1px solid rgba(28,20,16,0.1)">
@@ -552,6 +555,10 @@ class Component extends DCLogic {
           pills: 'Pills & tags', filterActive: 'Filter active', filterRest: 'Filter rest', tagAccent: 'Tag · accent', tagDefault: 'Tag · default',
           skillStat: 'Skill row · Stat cell', yearsLabel: 'Years in design', curiosityLabel: 'Curiosity',
           stickerDark: 'Sticker badge · Dark surface', yearsBadge: 'years in design', stackLabel: 'Current stack',
+          navItem: 'Nav item · selection frame',
+          navNote: 'One component, three states. The dashed marsala frame and the four handles are the same selection language Figma uses — the interface admitting it was designed. Handles never move: 6px squares pinned 10px out from the link box.',
+          navStates: ['Rest', 'Hover', 'Active'],
+          navNotes: ['No frame, grey label.', 'Frame at 45% — a hint, not a claim.', 'Full frame + yellow strike under the label.'],
           cards: 'Case card · Art card', caseEyebrow: 'Current · EdTech', caseCard: 'Case card',
           caseNote: 'Thumb 260px on the site, 180 here. Info block always 28px padding, arrow pinned bottom-right.',
           viewCase: 'View case study →', artCard: 'Art card · masonry, 4 columns', artAlt: 'Decorative piece — Mindful Love'
@@ -625,6 +632,10 @@ class Component extends DCLogic {
           pills: 'Pills y tags', filterActive: 'Filtro activo', filterRest: 'Filtro en reposo', tagAccent: 'Tag · acento', tagDefault: 'Tag · por defecto',
           skillStat: 'Fila de skill · Celda de stat', yearsLabel: 'Años en diseño', curiosityLabel: 'Curiosidad',
           stickerDark: 'Badge sticker · Superficie oscura', yearsBadge: 'años en diseño', stackLabel: 'Stack actual',
+          navItem: 'Ítem de nav · marco de selección',
+          navNote: 'Un componente, tres estados. El marco marsala punteado y los cuatro handles son el mismo lenguaje de selección que usa Figma — la interfaz admitiendo que fue diseñada. Los handles nunca se mueven: cuadrados de 6px fijados a 10px del box del enlace.',
+          navStates: ['Reposo', 'Hover', 'Activo'],
+          navNotes: ['Sin marco, etiqueta gris.', 'Marco al 45% — un indicio, no una afirmación.', 'Marco completo + tachado amarillo bajo la etiqueta.'],
           cards: 'Tarjeta de caso · Tarjeta de arte', caseEyebrow: 'Actual · EdTech', caseCard: 'Tarjeta de caso',
           caseNote: 'Thumb de 260px en el sitio, 180 aquí. Bloque de info siempre con 28px de padding, flecha fijada abajo a la derecha.',
           viewCase: 'Ver caso →', artCard: 'Tarjeta de arte · masonry, 4 columnas', artAlt: 'Pieza decorativa — Amor Consciente'
@@ -698,6 +709,10 @@ class Component extends DCLogic {
           pills: 'Pills e tags', filterActive: 'Filtro ativo', filterRest: 'Filtro em repouso', tagAccent: 'Tag · destaque', tagDefault: 'Tag · padrão',
           skillStat: 'Linha de skill · Célula de stat', yearsLabel: 'Anos em design', curiosityLabel: 'Curiosidade',
           stickerDark: 'Badge sticker · Superfície escura', yearsBadge: 'anos em design', stackLabel: 'Stack atual',
+          navItem: 'Item de nav · moldura de seleção',
+          navNote: 'Um componente, três estados. A moldura tracejada marsala e os quatro handles são a mesma linguagem de seleção do Figma — a interface admitindo que foi desenhada. Os handles nunca se movem: quadrados de 6px fixados a 10px do box do link.',
+          navStates: ['Repouso', 'Hover', 'Ativo'],
+          navNotes: ['Sem moldura, rótulo cinza.', 'Moldura a 45% — um indício, não uma afirmação.', 'Moldura cheia + risco amarelo sob o rótulo.'],
           cards: 'Card de case · Card de arte', caseEyebrow: 'Atual · EdTech', caseCard: 'Card de case',
           caseNote: 'Thumb de 260px no site, 180 aqui. Bloco de info sempre com 28px de padding, seta fixada embaixo à direita.',
           viewCase: 'Ver case →', artCard: 'Card de arte · masonry, 4 colunas', artAlt: 'Quadro decorativo — Amor Ciente'
@@ -732,6 +747,17 @@ class Component extends DCLogic {
       curRef: (el) => { this.cur = el; },
       ringRef: (el) => { this.ring = el; },
       t: t,
+      navSpecs: t.comp.navStates.map((st, i) => ({
+        state: st, note: t.comp.navNotes[i], label: t.nav.work, href: '#components', active: i === 2, forceHover: i === 1
+      })),
+      navItems: [
+        { label: t.nav.about, href: 'index.html#about', download: false, active: false },
+        { label: 'Design System', href: '#', download: false, active: true },
+        { label: t.nav.work, href: 'index.html#work', download: false, active: false },
+        { label: t.nav.art, href: 'index.html#art', download: false, active: false },
+        { label: t.nav.contact, href: 'index.html#contact', download: false, active: false },
+        { label: t.nav.resume, href: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf', download: lang === 'pt' ? 'Naiandra-Madhallena-Curriculo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf', active: false }
+      ],
       setEn: () => this.setLang('en'),
       setEs: () => this.setLang('es'),
       setPt: () => this.setLang('pt'),
@@ -741,8 +767,9 @@ class Component extends DCLogic {
       esFg: lang === 'es' ? '#FAF7F0' : '#8A7A6A',
       ptBg: lang === 'pt' ? '#1C1410' : 'transparent',
       ptFg: lang === 'pt' ? '#FAF7F0' : '#8A7A6A',
-      resumeHref: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf',
-      resumeName: lang === 'pt' ? 'Naiandra-Madhallena-Curriculo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf',
+      enLabel: lang === 'en' ? '🇬🇧 EN' : 'EN',
+      esLabel: lang === 'es' ? '🇪🇸 ES' : 'ES',
+      ptLabel: lang === 'pt' ? '🇧🇷 PT' : 'PT',
       marqueeItems: t.marquee.concat(t.marquee),
       palette: hexes.map((hex, i) => ({
         hex: hex, name: names[i], role: t.roles[i],

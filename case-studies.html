@@ -35,25 +35,14 @@
     <a href="index.html" style="font-family:'DM Mono',monospace; font-size:16px; font-weight:500; color:#1C1410; text-decoration:none; letter-spacing:.05em">nai.design</a>
     <ul style="display:flex; flex-wrap:wrap; gap:16px 34px; justify-content:center; list-style:none; margin:0; padding:0; align-items:center">
       <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
-        <li style="position:relative">
-          <span style="position:absolute; bottom:-28px; left:-4px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.06em; padding:2px 6px; border-radius:3px; background:#8B1A2E; color:#FAF7F0; white-space:nowrap; pointer-events:none; transition:opacity .2s, transform .2s; opacity:{{ n.on }}; transform:{{ n.tagShift }}">{{ n.tag }}</span>
-          <a href="{{ n.href }}" download="{{ n.download }}" onMouseEnter="{{ n.enter }}" onMouseLeave="{{ n.leave }}" style="position:relative; display:inline-block; padding:4px 2px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; text-decoration:none; transition:color .2s; color:{{ n.color }}" style-hover="color:#1C1410">
-            <span style="position:absolute; left:-4px; right:-4px; bottom:1px; height:9px; border-radius:2px; background:#F0C93A; transform:rotate(-1.5deg); z-index:0; pointer-events:none; transition:opacity .25s; opacity:{{ n.on }}"></span>
-            <span style="position:relative; z-index:1">{{ n.label }}</span>
-            <span style="position:absolute; inset:-7px; border:1px dashed #8B1A2E; border-radius:2px; pointer-events:none; transition:opacity .2s; opacity:{{ n.frame }}"></span>
-            <span style="position:absolute; top:-10px; left:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E; pointer-events:none; transition:opacity .2s; opacity:{{ n.on }}"></span>
-            <span style="position:absolute; top:-10px; right:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E; pointer-events:none; transition:opacity .2s; opacity:{{ n.on }}"></span>
-            <span style="position:absolute; bottom:-10px; left:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E; pointer-events:none; transition:opacity .2s; opacity:{{ n.on }}"></span>
-            <span style="position:absolute; bottom:-10px; right:-10px; width:6px; height:6px; background:#FAF7F0; border:1.5px solid #8B1A2E; pointer-events:none; transition:opacity .2s; opacity:{{ n.on }}"></span>
-          </a>
-        </li>
+        <dc-import name="NavItem" label="{{ n.label }}" href="{{ n.href }}" download="{{ n.download }}" active="{{ n.active }}" hint-size="90px,20px"></dc-import>
       </sc-for>
     </ul>
     <div style="display:flex; gap:16px; align-items:center">
       <div style="display:flex; border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; overflow:hidden; flex-shrink:0; background:#FAF7F0">
-        <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">EN</button>
-        <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">ES</button>
-        <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">PT</button>
+        <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">{{ enLabel }}</button>
+        <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">{{ esLabel }}</button>
+        <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">{{ ptLabel }}</button>
       </div>
       <a href="mailto:azevedonaiandra@gmail.com" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:10px 24px; border-radius:100px; background:#8B1A2E; color:#fff; text-decoration:none; transition:background .2s, transform .2s; white-space:nowrap" style-hover="background:#1C1410; transform:translateY(-1px); color:#fff">{{ nav.hire }}</a>
     </div>
@@ -407,6 +396,7 @@ class Component extends DCLogic {
           },
           zup: {
             eyebrow: 'EdTech · AI · Social impact',
+            teamCard: true, teamPhotoSrc: 'art/time-zup.png',
             title: 'Atlas: the system behind four AI learning products',
             subtitle: 'At Zup Innovation I created the Atlas Design System and designed the experiences on top of it — gamified journeys for Coda Mundo and accessible conversational UX for IA no Corre, an AI literacy initiative for underserved communities.',
             meta: [
@@ -463,7 +453,6 @@ class Component extends DCLogic {
             gallery: [
               { src: 'art/zup-antes-1.png', cap: 'Before — legacy interface', bg: '#FFFFFF', span: 'span 1' },
               { src: 'art/zup-antes-2.png', cap: 'Before — legacy interface', bg: '#FFFFFF', span: 'span 1' },
-              { src: 'art/time-zup.png', cap: 'The squad — continuous validation with PMs, devs and educators', bg: '#F2EDE2', span: 'span 1' },
               { src: 'art/camiseta-zup.png', cap: 'IA no Corre — identity and tone of voice reaching physical artifacts', bg: '#F2EDE2', span: 'span 1' }
             ],
             impact: {
@@ -586,6 +575,7 @@ class Component extends DCLogic {
           },
           zup: {
             eyebrow: 'EdTech · IA · Impacto social',
+            teamCard: true, teamPhotoSrc: 'art/time-zup.png',
             title: 'Atlas: el sistema detrás de cuatro productos de IA',
             subtitle: 'En Zup Innovation creé el Atlas Design System y diseñé las experiencias sobre él — jornadas gamificadas de Coda Mundo y UX conversacional accesible de IA no Corre, iniciativa de alfabetización en IA para comunidades vulnerables.',
             meta: [
@@ -642,7 +632,6 @@ class Component extends DCLogic {
             gallery: [
               { src: 'art/zup-antes-1.png', cap: 'Antes — interfaz legada', bg: '#FFFFFF', span: 'span 1' },
               { src: 'art/zup-antes-2.png', cap: 'Antes — interfaz legada', bg: '#FFFFFF', span: 'span 1' },
-              { src: 'art/time-zup.png', cap: 'El squad — validación continua con PMs, devs y educadores', bg: '#F2EDE2', span: 'span 1' },
               { src: 'art/camiseta-zup.png', cap: 'IA no Corre — identidad y tono de voz llegando al artefacto físico', bg: '#F2EDE2', span: 'span 1' }
             ],
             impact: {
@@ -765,6 +754,7 @@ class Component extends DCLogic {
           },
           zup: {
             eyebrow: 'EdTech · IA · Impacto social',
+            teamCard: true, teamPhotoSrc: 'art/time-zup.png',
             title: 'Atlas: o sistema atrás de quatro produtos de IA',
             subtitle: 'Na Zup Innovation criei o Atlas Design System e desenhei as experiências sobre ele — jornadas gamificadas do Coda Mundo e UX conversacional acessível do IA no Corre, iniciativa de alfabetização em IA para comunidades vulneráveis.',
             meta: [
@@ -821,7 +811,6 @@ class Component extends DCLogic {
             gallery: [
               { src: 'art/zup-antes-1.png', cap: 'Antes — interface legada', bg: '#FFFFFF', span: 'span 1' },
               { src: 'art/zup-antes-2.png', cap: 'Antes — interface legada', bg: '#FFFFFF', span: 'span 1' },
-              { src: 'art/time-zup.png', cap: 'O squad — validação contínua com PMs, devs e educadores', bg: '#F2EDE2', span: 'span 1' },
               { src: 'art/camiseta-zup.png', cap: 'IA no Corre — identidade e tom de voz chegando ao artefato físico', bg: '#F2EDE2', span: 'span 1' }
             ],
             impact: {
@@ -858,26 +847,21 @@ class Component extends DCLogic {
     const ids = ['ftd', 'zup'];
     const labels = { ftd: 'FTD Educação', zup: 'Zup Innovation' };
     const cid = this.state.caseId;
-    const active = 'cases';
+    const active = 'work';
     const hovered = this.state.hovered;
     const navDefs = [
-      { id: 'about', href: 'index.html#about', label: t.nav.about, tag: '01 · about' },
-      { id: 'system', href: 'design-system.html', label: t.nav.system, tag: '02 · system ↗' },
-      { id: 'work', href: 'index.html#work', label: t.nav.work, tag: '03 · work' },
-      { id: 'art', href: 'index.html#art', label: t.nav.art, tag: '04 · art' },
-      { id: 'contact', href: 'index.html#contact', label: t.nav.contact, tag: '05 · contact' },
-      { id: 'resume', href: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'pt' ? 'Naiandra-Madhallena-Currículo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf' }
+      { id: 'about', href: 'index.html#about', label: t.nav.about },
+      { id: 'system', href: 'design-system.html', label: t.nav.system },
+      { id: 'work', href: 'index.html#work', label: t.nav.work },
+      { id: 'art', href: 'index.html#art', label: t.nav.art },
+      { id: 'contact', href: 'index.html#contact', label: t.nav.contact },
+      { id: 'resume', href: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf', label: t.nav.resume, download: lang === 'pt' ? 'Naiandra-Madhallena-Currículo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf' }
     ];
     const other = cid === 'ftd' ? 'zup' : 'ftd';
     return {
       navItems: navDefs.map((n) => ({
-        label: n.label, href: n.href, tag: n.tag, download: n.download || false,
-        on: active === n.id ? 1 : 0,
-        frame: hovered === n.id ? 1 : 0,
-        color: active === n.id ? '#1C1410' : '#8A7A6A',
-        tagShift: active === n.id ? 'translateY(0)' : 'translateY(-4px)',
-        enter: () => this.setState({ hovered: n.id }),
-        leave: () => this.setState({ hovered: null })
+        label: n.label, href: n.href, download: n.download || false,
+        active: active === n.id
       })),
       customCursor: this.props.customCursor !== false,
       showTodos: this.props.showTodos !== false,
@@ -892,6 +876,9 @@ class Component extends DCLogic {
       enFg: lang === 'en' ? '#FAF7F0' : '#8A7A6A',
       ptBg: lang === 'pt' ? '#1C1410' : 'transparent',
       ptFg: lang === 'pt' ? '#FAF7F0' : '#8A7A6A',
+      enLabel: lang === 'en' ? '🇬🇧 EN' : 'EN',
+      esLabel: lang === 'es' ? '🇪🇸 ES' : 'ES',
+      ptLabel: lang === 'pt' ? '🇧🇷 PT' : 'PT',
       nav: t.nav, ui: t.ui,
       c: (() => {
         const base = t.cases[cid] || t.cases.ftd;
