@@ -561,7 +561,7 @@ class Component extends DCLogic {
       { id: 'work', href: '#work', label: t.nav.work },
       { id: 'art', href: '#art', label: t.nav.art },
       { id: 'contact', href: '#contact', label: t.nav.contact },
-      { id: 'resume', href: lang === 'pt' ? 'pt-curriculo-naiandra-madhallena.pdf' : 'en-resume-naiandra-madhallena.pdf', label: t.nav.resume, download: lang === 'pt' ? 'pt-curriculo-naiandra-madhallena.pdf' : 'en-resume-naiandra-madhallena.pdf' }
+      { id: 'resume', href: lang === 'pt' ? 'pt-curriculo-naiandra-madhallena.pdf' : lang === 'es' ? 'es-curriculum-naiandra-madhallena.pdf' : 'en-resume-naiandra-madhallena.pdf', label: t.nav.resume, download: lang === 'pt' ? 'pt-curriculo-naiandra-madhallena.pdf' : lang === 'es' ? 'es-curriculum-naiandra-madhallena.pdf' : 'en-resume-naiandra-madhallena.pdf' }
     ];
     return {
       navItems: navDefs.map((n) => ({
