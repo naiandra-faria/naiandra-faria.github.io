@@ -54,6 +54,7 @@
     <div style="display:flex; gap:16px; align-items:center">
       <div style="display:flex; border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; overflow:hidden; flex-shrink:0; background:#FAF7F0">
         <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">EN</button>
+        <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">ES</button>
         <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">PT</button>
       </div>
       <a href="mailto:azevedonaiandra@gmail.com" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:10px 24px; border-radius:100px; background:#8B1A2E; color:#fff; text-decoration:none; transition:background .2s, transform .2s; white-space:nowrap" style-hover="background:#1C1410; transform:translateY(-1px); color:#fff">{{ nav.hire }}</a>
@@ -314,11 +315,17 @@
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;pt&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'pt'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;pt&quot;,&quot;es&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'pt' | 'es'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
 class Component extends DCLogic {
   state = { lang: this.props.lang || 'en', active: 'home', hovered: null, hoveredArt: null };
 
+  setLang(l) {
+    try { localStorage.setItem('nai-lang', l); } catch (e) {}
+    this.setState({ lang: l });
+  }
+
   componentDidMount() {
+    try { const l = localStorage.getItem('nai-lang'); if (l === 'en' || l === 'pt' || l === 'es') this.setState({ lang: l }); } catch (e) {}
     this.mx = 0; this.my = 0; this.rx = 0; this.ry = 0;
     this.onMove = (e) => {
       this.mx = e.clientX; this.my = e.clientY;
@@ -448,6 +455,52 @@ class Component extends DCLogic {
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psychology × Design', 'Accessibility WCAG AAA', 'EdTech · FinTech · SaaS'],
         banner: ['Selected Work', 'Product Design', 'Case Studies']
       },
+      es: {
+        nav: { about: 'Sobre mí', system: 'Design System', work: 'Proyectos', art: 'Arte', contact: 'Contacto', resume: 'Currículum', hire: 'Contrátame' },
+        system: { eyebrow: 'Design system · v1.0', title: 'El sistema detrás de este sitio — ábrelo.', cta: 'Ver el sistema' },
+        hero: {
+          tag: 'Product Designer · Disponible para freelance',
+          descStrong: 'Psicología × Diseño.',
+          descRest: 'Creo productos digitales intuitivos, accesibles y humanos — con más de 8 años de experiencia en EdTech, FinTech, SaaS y B2C.',
+          btnWork: 'Ver proyectos', btnTalk: 'Hablemos', badge: 'años en diseño'
+        },
+        about: {
+          eyebrow: 'Quién soy', title1: 'Psicología', title2: 'se encuentra con', title3: 'Diseño.',
+          p1: 'Soy Product Designer y vengo de la Psicología — y eso no es un detalle, es el núcleo de todo lo que hago. Cada decisión que tomo se basa en cómo las personas piensan, sienten y se comportan.',
+          p2: 'Trabajo end-to-end: desde investigación y estrategia hasta interfaces refinadas y design systems escalables. Curiosa, autodidacta y colaborativa por naturaleza.',
+          quote: '"El arte de crear es lo que me mueve. El diseño es cómo bailo con el mundo."',
+          skillsEyebrow: 'Lo que hago mejor', stackEyebrow: 'Stack actual',
+          originQuote: '"Nacida en el corazón del Cerrado brasileño, movida por la curiosidad y por la necesidad de crear soluciones con significado."'
+        },
+        work: { eyebrow: 'Proyectos seleccionados', title1: 'Proyectos que', title2: 'importan.', filterAll: 'Todos', viewCase: 'Ver caso →' },
+        art: { eyebrow: 'Más allá de la pantalla', title1: 'Arte &', title2: 'Oficio.', quote: '"Conectada con el arte de tantas formas y píxeles."' },
+        contact: {
+          eyebrow: 'Hablemos', title1: 'Creemos', title2: 'algo', title3: 'increíble.',
+          sub: 'Abierta a proyectos freelance, colaboraciones y oportunidades globales.',
+          sub2: 'Trabajo en inglés, portugués y español — hablemos de tu próximo proyecto.'
+        },
+        stats: [
+          { num: '8+', label: 'Años en diseño' }, { num: '6+', label: 'Productos digitales' },
+          { num: '6', label: 'Industrias' }, { num: '∞', label: 'Curiosidad' }
+        ],
+        skills: [
+          { name: 'Product Thinking', sub: 'Estrategia', dot: '#8B1A2E' },
+          { name: 'Design Systems', sub: 'Tokens · Variables', dot: '#F0C93A' },
+          { name: 'UX Research', sub: 'Tests · Entrevistas', dot: '#E8909D' },
+          { name: 'Accesibilidad', sub: 'WCAG AAA', dot: '#8B1A2E' },
+          { name: 'Figma Expert', sub: 'Avanzado · MCP', dot: '#F0C93A' },
+          { name: 'Colaboración', sub: 'Multidisciplinar', dot: '#E8909D' }
+        ],
+        cases: [
+          { href: 'case-studies.html#ftd', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech · Design System', name: 'FTD Educação — Tabla Periódica', desc: 'Design system completo con tokens semánticos, 14 primitivas de color en WCAG AAA y 3 modos de visualización para una Tabla Periódica interactiva.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
+          { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Impacto Social', name: 'Zup Innovation × Itaú', desc: 'Soluciones escalables e inclusivas en 4 productos digitales — Coda Mundo y Coda Hub — con foco en IA, gamificación y alfabetización digital.', tags: ['Design System*', 'UX/UI', 'Gamificación', 'IA'] },
+          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'Diseño end-to-end para una plataforma de logística que conecta transportistas y cargadores en Europa — simplificando operaciones complejas de flete.', tags: ['UX Research', 'B2B', 'SaaS'] },
+          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Experiencia de pago móvil centrada en la simplicidad y la confianza — haciendo las transacciones financieras accesibles para todos.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
+        ],
+        artCaptions: ['Pieza decorativa — Amor Consciente', 'Lienzos y árbol de Navidad peludo', 'Colgantes de porcelana fría', 'Mandala en la pared', 'Funda de gafas "girl power"', 'Funda de gafas galaxia', 'Mural "Intención y Presencia"', 'Llavero "Intuición"', 'Ilustración de la mascota Figgy', 'Joyero para madrinas', 'Lienzo — "El amor es una elección"', 'Placa de maternidad', 'Placa "Bendecida Eres"', 'Funda de gafas "Branding Citrino"', 'Portavasos geek', 'Portavasos bonito', 'Collar con estampado azul'],
+        marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicología × Diseño', 'Accesibilidad WCAG AAA', 'EdTech · FinTech · SaaS'],
+        banner: ['Proyectos', 'Product Design', 'Casos de Estudio']
+      },
       pt: {
         nav: { about: 'Sobre', system: 'Design System', work: 'Projetos', art: 'Arte', contact: 'Contato', resume: 'Currículo Rápido', hire: 'Contratar' },
         system: { eyebrow: 'Design system · v1.0', title: 'O sistema por trás deste site — abra.', cta: 'Ver o sistema' },
@@ -519,7 +572,7 @@ class Component extends DCLogic {
       { id: 'work', href: '#work', label: t.nav.work, tag: '03 · work' },
       { id: 'art', href: '#art', label: t.nav.art, tag: '04 · art' },
       { id: 'contact', href: '#contact', label: t.nav.contact, tag: '05 · contact' },
-      { id: 'resume', href: lang === 'en' ? 'resume-en.pdf' : 'resume-pt.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'en' ? 'Naiandra-Madhallena-Resume-EN.pdf' : 'Naiandra-Madhallena-Currículo-PT.pdf' }
+      { id: 'resume', href: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'pt' ? 'Naiandra-Madhallena-Currículo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf' }
     ];
     return {
       navItems: navDefs.map((n) => ({
@@ -535,8 +588,11 @@ class Component extends DCLogic {
       rootRef: (el) => { this.root = el; },
       curRef: (el) => { this.cur = el; },
       ringRef: (el) => { this.ring = el; },
-      setEn: () => this.setState({ lang: 'en' }),
-      setPt: () => this.setState({ lang: 'pt' }),
+      setEn: () => this.setLang('en'),
+      setPt: () => this.setLang('pt'),
+      setEs: () => this.setLang('es'),
+      esBg: lang === 'es' ? '#1C1410' : 'transparent',
+      esFg: lang === 'es' ? '#FAF7F0' : '#8A7A6A',
       enBg: lang === 'en' ? '#1C1410' : 'transparent',
       enFg: lang === 'en' ? '#FAF7F0' : '#8A7A6A',
       ptBg: lang === 'pt' ? '#1C1410' : 'transparent',

@@ -52,6 +52,7 @@
     <div style="display:flex; gap:16px; align-items:center">
       <div style="display:flex; border:1.5px solid rgba(28,20,16,0.1); border-radius:100px; overflow:hidden; flex-shrink:0; background:#FAF7F0">
         <button onClick="{{ setEn }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ enBg }}; color:{{ enFg }}">EN</button>
+        <button onClick="{{ setEs }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ esBg }}; color:{{ esFg }}">ES</button>
         <button onClick="{{ setPt }}" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:7px 16px; border:none; cursor:none; transition:all .2s; background:{{ ptBg }}; color:{{ ptFg }}">PT</button>
       </div>
       <a href="mailto:azevedonaiandra@gmail.com" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:10px 24px; border-radius:100px; background:#8B1A2E; color:#fff; text-decoration:none; transition:background .2s, transform .2s; white-space:nowrap" style-hover="background:#1C1410; transform:translateY(-1px); color:#fff">{{ nav.hire }}</a>
@@ -270,11 +271,17 @@
   </section>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;pt&quot;],&quot;default&quot;:&quot;pt&quot;,&quot;tsType&quot;:&quot;'en' | 'pt'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;caseId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ftd&quot;,&quot;zup&quot;],&quot;default&quot;:&quot;ftd&quot;,&quot;tsType&quot;:&quot;'ftd' | 'zup'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showTodos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;pt&quot;,&quot;es&quot;],&quot;default&quot;:&quot;pt&quot;,&quot;tsType&quot;:&quot;'en' | 'pt' | 'es'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;caseId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ftd&quot;,&quot;zup&quot;],&quot;default&quot;:&quot;ftd&quot;,&quot;tsType&quot;:&quot;'ftd' | 'zup'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showTodos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
 class Component extends DCLogic {
   state = { lang: this.props.lang || 'pt', caseId: this.props.caseId || 'ftd', hovered: null, mock: 0 };
 
+  setLang(l) {
+    try { localStorage.setItem('nai-lang', l); } catch (e) {}
+    this.setState({ lang: l });
+  }
+
   componentDidMount() {
+    try { const l = localStorage.getItem('nai-lang'); if (l === 'en' || l === 'pt' || l === 'es') this.setState({ lang: l }); } catch (e) {}
     const h = (window.location.hash || '').replace('#', '');
     if (h === 'zup' || h === 'ftd') this.setState({ caseId: h });
     this.mx = 0; this.my = 0; this.rx = 0; this.ry = 0;
@@ -484,6 +491,178 @@ class Component extends DCLogic {
           }
         }
       },
+      es: {
+        nav: { about: 'Sobre mí', system: 'Design System', work: 'Proyectos', art: 'Arte', contact: 'Contacto', resume: 'Currículum', hire: 'Contrátame' },
+        ui: {
+          switchLabel: 'Casos de estudio', resultLabel: 'El resultado primero', problemLabel: '01 · El problema',
+          roleLabel: '02 · Mi rol', constraintsLabel: 'Restricciones', researchLabel: '03 · Investigación',
+          decisionsLabel: '04 · Decisiones de diseño', decisionsTitle: 'Qué decidí, y por qué', effectLabel: 'Efecto',
+          galleryLabel: '05 · Pantallas y artefactos', impactLabel: '06 · Impacto', learningLabel: '07 · Lo que aprendí',
+          todoLabel: 'Para complementar', todoNote: 'Puntos donde tu memoria vale más que mi inferencia.',
+          teamPhotoPlaceholder: 'Suelta la foto del squad', teamPhotoCaption: 'El equipo detrás',
+          back: 'Volver al portafolio', nextCase: 'Siguiente caso'
+        },
+        cases: {
+          ftd: {
+            eyebrow: 'Actual · EdTech · Design System',
+            teamCard: true, teamPhotoSrc: 'art/image-timeFTD.jpeg',
+            title: 'Una tabla periódica que el alumno explora',
+            subtitle: 'Rediseño y modernización de una Tabla Periódica interactiva a gran escala en FTD Educação — convertir una densa tabla de consulta en una superficie de aprendizaje exploratoria, sobre un sistema escalable de componentes y tokens.',
+            meta: [
+              { k: 'Rol', v: 'Product Designer — liderazgo de diseño del rediseño' },
+              { k: 'Periodo', v: 'Mar 2025 → actual · Remoto, Brasil' },
+              { k: 'Equipo', v: 'Producto, educación e ingeniería' },
+              { k: 'Alcance', v: 'Estrategia UX, sistema de UI, prototipo hi-fi, fundaciones del DS' }
+            ],
+            results: [
+              { num: '118', unit: 'elementos', label: 'Una sola superficie, sin muro de datos', note: 'Disclosure progresivo: en reposo, cada elemento muestra solo lo que lo identifica' },
+              { num: '3', unit: 'modos de lectura', label: 'Consulta, estudio guiado y exploración libre', note: 'Cada tarea con su punto de entrada y nivel de detalle' },
+              { num: '1', unit: 'sistema', label: 'Tokens semánticos detrás de toda la tabla', note: 'Familias, estados y densidad como variables — no estilos aislados' }
+            ],
+            problem: {
+              title: 'Una referencia de ciencias donde nadie quería quedarse',
+              body: 'La experiencia existente ponía cada elemento, cada propiedad y cada etiqueta en el mismo peso visual. Funcionaba como tabla de consulta, no como lugar para aprender: el alumno encontraba el dato, pero no la relación entre los datos — y el profesor no tenía un camino natural por el contenido.',
+              bullets: [
+                { n: '01', t: 'Jerarquía plana — 118 elementos compitiendo por atención, sin orden de lectura' },
+                { n: '02', t: 'Faltaba navegación educativa: nada llevaba de una familia al elemento y a la propiedad' },
+                { n: '03', t: 'Estilos creados uno a uno, así que cualquier evolución exigía rediseñar la tabla entera' },
+                { n: '04', t: 'Responsividad y accesibilidad tratadas como ajuste final en una densa cuadrícula de datos' }
+              ]
+            },
+            role: {
+              title: 'Liderazgo de diseño dentro de un squad multidisciplinar',
+              body: 'Conduje el rediseño de punta a punta: jerarquía de la información, patrones de interacción, el sistema de UI detrás y el prototipo de alta fidelidad que alineaba al equipo. Trabajé en ciclo continuo con producto, pedagogía e ingeniería — toda decisión visual tenía que pasar por tres filtros: enseña, se puede construir, escala.',
+              constraints: [
+                { k: 'Pedagogía', v: 'El contenido y la terminología curriculares son fijos — el diseño no simplifica la ciencia' },
+                { k: 'Densidad', v: 'Los 118 elementos deben seguir alcanzables en una única superficie' },
+                { k: 'Ingeniería', v: 'La componentización tenía que caber en lo que el front podía implementar' },
+                { k: 'Accesib.', v: 'Contraste WCAG y navegación por teclado en una cuadrícula codificada por color' },
+                { k: 'Devices', v: 'Del proyector del aula al móvil del alumno' }
+              ]
+            },
+            research: {
+              title: 'Entender cómo se usa la tabla de verdad',
+              body: 'Antes de tocar el layout, mapeé la superficie como tres trabajos distintos: consulta rápida, estudio guiado y exploración libre. Cada uno quiere un nivel de detalle distinto en un momento distinto — exactamente lo que una tabla plana no puede servir al mismo tiempo.',
+              items: [
+                { k: 'Auditoría de contenido', v: 'Inventario de propiedades, etiquetas y estados para descubrir qué necesita estar visible en reposo' },
+                { k: 'Mapa de tareas', v: 'Consulta, estudio y exploración separados en flujos y puntos de entrada propios' },
+                { k: 'Auditoría de sistema', v: 'Catálogo de los estilos existentes para ver cuánto de la interfaz era realmente único — casi nada' },
+                { k: 'Ciclos de viabilidad', v: 'Chequeo continuo con ingeniería sobre coste de interacción y límites de renderizado' },
+                { k: 'Revisión pedagógica', v: 'Equipo de educación validando vocabulario, agrupación y progresión' },
+                { k: 'Pase de accesibilidad', v: 'Familias semánticas de color probadas para no depender solo del matiz' }
+              ]
+            },
+            decisions: [
+              { n: '01', title: 'Color semántico en vez de color decorativo', why: 'Las familias de elementos se convirtieron en un sistema de tokens con significado: el matiz carga clasificación, no gusto visual — y cada par se verificó en contraste para que el color nunca sea la única señal.', effect: 'La tabla se lee por grupo de un vistazo y puede retematizarse sin romper el sentido' },
+              { n: '02', title: 'Disclosure progresivo de las propiedades', why: 'En reposo, cada elemento muestra el mínimo que lo identifica. La profundidad llega bajo demanda — hover, foco, panel de detalle — manteniendo la superficie calma y el contenido completo.', effect: 'Menos ruido visual, cero pérdida de contenido' },
+              { n: '03', title: 'Patrones modulares de interacción', why: 'Una celda de elemento, un panel de detalle, un control de filtro — definidos una vez como componentes con estados y reutilizados en toda la experiencia.', effect: 'Consistencia por construcción y camino más rápido para nuevas features' },
+              { n: '04', title: 'Variables y tokens como fundación del DS', why: 'Espaciado, radio, tipografía y color pasaron a variables en Figma, para que la tabla sea una instancia del sistema y no una excepción a él.', effect: 'Diseño y código hablando los mismos nombres, con handoff menos ambiguo' },
+              { n: '05', title: 'Responsive por estructura, no por breakpoint', why: 'La cuadrícula se reconstruyó para refluir según el límite de densidad de cada device, en vez de encoger una tabla de escritorio hasta el móvil.', effect: 'Usable en el proyector del aula y en el móvil del alumno' }
+            ],
+            mocks: {
+              caption: 'Mockup hi-fi · dos visiones del mismo sistema',
+              layers: [
+                { src: 'art/tabela-periodica.svg', label: 'Vista 01' },
+                { src: 'art/tabela-periodica-2.svg', label: 'Vista 02' }
+              ]
+            },
+            gallery: [
+              { vid: 'art/tabela-home-prototipo.mp4', cap: 'Navegación en el prototipo', bg: '#0F1724', span: 'span 2' }
+            ],
+            impact: {
+              title: 'De tabla que se consulta a sistema que se hace crecer',
+              bullets: [
+                { n: '01', t: 'Reducción de la complejidad de la interfaz con navegación más clara y patrones modulares' },
+                { n: '02', t: 'Aumento de consistencia y escalabilidad organizando componentes y tokens semánticos' },
+                { n: '03', t: 'Experiencia educativa más interactiva y centrada en el alumno por decisiones orientadas por UX' },
+                { n: '04', t: 'Colaboración diseño–desarrollo fortalecida con prototipado estructurado y pensamiento sistémico' }
+              ]
+            },
+            learning: {
+              quote: 'En educación, contener es una feature: el trabajo más difícil fue decidir qué no debería ver todavía el alumno.',
+              body: 'Diseñar para el aprendizaje me enseñó a tratar la densidad como decisión pedagógica, no de layout. Y construir el sistema junto con la pantalla — no después de ella — es lo que hizo del rediseño algo que el equipo puede evolucionar sin que yo rediseñe todo.'
+            },
+            todos: []
+          },
+          zup: {
+            eyebrow: 'EdTech · IA · Impacto social',
+            title: 'Atlas: el sistema detrás de cuatro productos de IA',
+            subtitle: 'En Zup Innovation creé el Atlas Design System y diseñé las experiencias sobre él — jornadas gamificadas de Coda Mundo y UX conversacional accesible de IA no Corre, iniciativa de alfabetización en IA para comunidades vulnerables.',
+            meta: [
+              { k: 'Rol', v: 'Product Designer — liderazgo del Atlas DS' },
+              { k: 'Periodo', v: 'Jun 2024 → Nov 2025 · Remoto, São Paulo' },
+              { k: 'Equipo', v: 'PMs, desarrolladores y educadores' },
+              { k: 'Alcance', v: 'Design System, gamificación, UX conversacional, investigación' }
+            ],
+            results: [
+              { num: '+40%', unit: 'velocidad', label: 'Equipo de diseño más rápido con Atlas', note: 'Medido en la entrega del equipo de diseño en toda la familia de productos' },
+              { num: '3mil+', unit: 'estudiantes', label: 'Alcanzados por las jornadas gamificadas', note: 'Flujos de aprendizaje y diseño de interacción de Coda Mundo' },
+              { num: '4', unit: 'productos', label: 'Productos educativos con IA en un solo sistema', note: 'Fundaciones, tokens y patrones de UI compartidos y documentados' }
+            ],
+            problem: {
+              title: 'Cuatro productos, cuatro lenguajes, un equipo',
+              body: 'El portafolio de productos educativos con IA crecía más rápido que sus fundaciones de diseño. Cada producto resolvía los mismos problemas de nuevo — botones, estados, jornadas, documentación — lo que significaba retrabajo para diseño, adivinanza para ingeniería y una experiencia inconsistente para el alumno que transitaba entre ellos.',
+              bullets: [
+                { n: '01', t: 'Los patrones reutilizables existían solo en la cabeza de las personas: cada pantalla nueva reiniciaba la discusión' },
+                { n: '02', t: 'Las lagunas de documentación convertían el handoff en interpretación, generando retrabajo' },
+                { n: '03', t: 'El público — jóvenes en vulnerabilidad social y baja familiaridad digital — no perdona la inconsistencia' },
+                { n: '04', t: 'Las funciones de IA exigían patrones de interacción para los que el equipo aún no tenía referencia' }
+              ]
+            },
+            role: {
+              title: 'Autora del sistema y product designer al mismo tiempo',
+              body: 'Lideré la creación de Atlas — fundaciones, estructura de tokens y patrones escalables de interfaz — mientras diseñaba los productos que lo consumían. Esa posición doble mantuvo el sistema honesto: todo componente ganó su lugar resolviendo una pantalla real primero, y solo después fue generalizado y documentado.',
+              constraints: [
+                { k: 'Público', v: 'Usuarios con baja familiaridad digital y acceso limitado a device y conexión' },
+                { k: 'Multiproducto', v: 'Un sistema sirviendo cuatro productos con tonos distintos' },
+                { k: 'IA', v: 'Flujos conversacionales con salida no totalmente previsible' },
+                { k: 'Accesib.', v: 'Accesibilidad como requisito, no como etapa de revisión' },
+                { k: 'Cadencia', v: 'Ciclos continuos de validación con PMs, devs y educadores' }
+              ]
+            },
+            research: {
+              title: 'Testear con el público que suele saltarse',
+              body: 'Discovery, tests de usabilidad y prototipado iterativo se hicieron con jóvenes en situación de vulnerabilidad social — los usuarios más afectados por una interfaz confusa y menos representados en la mayoría de las investigaciones. El insight conductual fue la materia prima: traduje la vacilación observada en decisión de interfaz.',
+              items: [
+                { k: 'Discovery', v: 'Investigación de contexto sobre acceso, dispositivos y experiencia digital previa' },
+                { k: 'Tests de usabilidad', v: 'Sesiones con jóvenes de comunidades vulnerables, iterando entre rondas' },
+                { k: 'Lente conductual', v: 'Formación en Psicología aplicada para leer vacilación, abandono y motivación' },
+                { k: 'Voz de los educadores', v: 'Validación continua de adherencia pedagógica' },
+                { k: 'Sondas conversacionales', v: 'Prototipos de diálogo con IA para encontrar dónde el usuario pierde confianza' },
+                { k: 'Auditoría de DS', v: 'Catálogo de patrones repetidos entre productos para definir qué debería poseer Atlas' }
+              ]
+            },
+            decisions: [
+              { n: '01', title: 'Atlas construido a partir de pantallas reales', why: 'Fundaciones, tokens y patrones se extrajeron de lo que los cuatro productos ya necesitaban, así que adoptar el sistema nunca exigió reescribir nada.', effect: 'Sistema adoptado en pleno vuelo — y entrega 40% más rápida' },
+              { n: '02', title: 'Documentación como parte del componente', why: 'Un patrón no estaba listo hasta que uso, estados y racional estuvieran escritos. El handoff dejó de depender de estar en la reunión correcta.', effect: 'Menos retrabajo, más consistencia entre los equipos' },
+              { n: '03', title: 'Gamificación como andamio, no adorno', why: 'En Coda Mundo, progresión, feedback y recompensa se diseñaron para sostener la atención en la dificultad — motivación por principios conductuales, no puntos por puntos.', effect: 'Jornadas involucrando a más de 3.000 estudiantes' },
+              { n: '04', title: 'UX conversacional para baja alfabetización digital', why: 'En IA no Corre, lenguaje simple, próximo paso siempre visible y estados de error tolerantes hicieron accesible un asistente de IA para quien se encuentra uno por primera vez.', effect: 'Alfabetización en IA accesible a comunidades vulnerables' },
+              { n: '05', title: 'Accesibilidad dentro de los tokens', why: 'Contraste, área táctil y visibilidad de estado se resolvieron en la fundación, para que ningún producto pudiera subir un componente inaccesible sin querer.', effect: 'Accesible por defecto en toda la familia de productos' }
+            ],
+            gallery: [
+              { src: 'art/zup-antes-1.png', cap: 'Antes — interfaz legada', bg: '#FFFFFF', span: 'span 1' },
+              { src: 'art/zup-antes-2.png', cap: 'Antes — interfaz legada', bg: '#FFFFFF', span: 'span 1' },
+              { src: 'art/time-zup.png', cap: 'El squad — validación continua con PMs, devs y educadores', bg: '#F2EDE2', span: 'span 1' },
+              { src: 'art/camiseta-zup.png', cap: 'IA no Corre — identidad y tono de voz llegando al artefacto físico', bg: '#F2EDE2', span: 'span 1' }
+            ],
+            impact: {
+              title: 'Un sistema que hizo más rápido a todo el equipo',
+              bullets: [
+                { n: '01', t: 'Aumento del 40% en la velocidad de entrega del equipo de diseño con el Atlas Design System' },
+                { n: '02', t: 'Fundaciones escalables estructuradas para productos educativos orientados por IA' },
+                { n: '03', t: 'Experiencias gamificadas diseñadas para más de 3.000 estudiantes' },
+                { n: '04', t: 'Mejor documentación y flujos de diseño, reduciendo retrabajo entre equipos' },
+                { n: '05', t: 'Contribución a la evolución de la identidad visual y del tono de voz de IA no Corre' }
+              ]
+            },
+            learning: {
+              quote: 'Un design system no es una biblioteca — es un acuerdo. Su valor aparece en la velocidad de las otras personas.',
+              body: 'Trabajar con usuarios de poca familiaridad digital me volvió más rigurosa con la claridad que cualquier guideline. Y diseñar el sistema mientras los productos salían me enseñó que la documentación es trabajo de diseño, no burocracia.'
+            },
+            todos: []
+          }
+        }
+      },
       pt: {
         nav: { about: 'Sobre', system: 'Design System', work: 'Trabalhos', art: 'Arte', contact: 'Contato', resume: 'Currículo', hire: 'Contratar' },
         ui: {
@@ -687,7 +866,7 @@ class Component extends DCLogic {
       { id: 'work', href: 'index.html#work', label: t.nav.work, tag: '03 · work' },
       { id: 'art', href: 'index.html#art', label: t.nav.art, tag: '04 · art' },
       { id: 'contact', href: 'index.html#contact', label: t.nav.contact, tag: '05 · contact' },
-      { id: 'resume', href: lang === 'en' ? 'resume-en.pdf' : 'resume-pt.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'en' ? 'Naiandra-Madhallena-Resume-EN.pdf' : 'Naiandra-Madhallena-Currículo-PT.pdf' }
+      { id: 'resume', href: lang === 'pt' ? 'resume-pt.pdf' : 'resume-en.pdf', label: t.nav.resume, tag: 'pdf · download', download: lang === 'pt' ? 'Naiandra-Madhallena-Currículo-PT.pdf' : 'Naiandra-Madhallena-Resume-EN.pdf' }
     ];
     const other = cid === 'ftd' ? 'zup' : 'ftd';
     return {
@@ -704,8 +883,11 @@ class Component extends DCLogic {
       showTodos: this.props.showTodos !== false,
       curRef: (el) => { this.cur = el; },
       ringRef: (el) => { this.ring = el; },
-      setEn: () => this.setState({ lang: 'en' }),
-      setPt: () => this.setState({ lang: 'pt' }),
+      setEn: () => this.setLang('en'),
+      setPt: () => this.setLang('pt'),
+      setEs: () => this.setLang('es'),
+      esBg: lang === 'es' ? '#1C1410' : 'transparent',
+      esFg: lang === 'es' ? '#FAF7F0' : '#8A7A6A',
       enBg: lang === 'en' ? '#1C1410' : 'transparent',
       enFg: lang === 'en' ? '#FAF7F0' : '#8A7A6A',
       ptBg: lang === 'pt' ? '#1C1410' : 'transparent',
