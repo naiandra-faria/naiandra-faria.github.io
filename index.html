@@ -542,7 +542,7 @@ class Component extends DCLogic {
   renderVals() {
     const lang = this.state.lang;
     const t = this.copy()[lang] || this.copy().en;
-    const artFiles = ['art/art-13.jpg', 'art/art-02.jpg', 'art/art-03.jpg', 'art/art-05.jpg', 'art/art-06.jpg', 'art/art-12.jpg', 'art/art-09.jpg', 'art/art-10.jpg', 'art/art-07.png', 'art/art-14.jpg', 'art/art-15.jpg', 'art/art-16.jpg', 'art/art-18.jpg', 'art/art-19.jpg', 'art/art-01.jpg', 'art/art-08.jpg', 'art/art-11.jpg'];
+    const artFiles = ['assets/art-13.jpg', 'assets/art-02.jpg', 'assets/art-03.jpg', 'assets/art-05.jpg', 'assets/art-06.jpg', 'assets/art-12.jpg', 'assets/art-09.jpg', 'assets/art-10.jpg', 'assets/art-07.png', 'assets/art-14.jpg', 'assets/art-15.jpg', 'assets/art-16.jpg', 'assets/art-18.jpg', 'assets/art-19.jpg', 'assets/art-01.jpg', 'assets/art-08.jpg', 'assets/art-11.jpg'];
     const artDots = ['#8B1A2E', '#F0C93A', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#E8909D', '#E8909D', '#F0C93A', '#F0C93A', '#8B1A2E', '#F0C93A', '#E8909D', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E'];
     const cases = t.cases.map((c) => Object.assign({}, c, {
       tags: c.tags.map((label) => {
