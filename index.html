@@ -235,8 +235,7 @@
             <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; margin-bottom:12px; display:flex; align-items:center; gap:8px">
               <span style="width:12px; height:1px; background:#8A7A6A; display:block"></span>{{ c.eyebrow }}
             </div>
-            <h3 style="font-family:'Fraunces',serif; font-size:26px; font-weight:700; line-height:1.15; margin:0 0 10px">{{ c.name }}</h3>
-            <p style="font-size:14px; line-height:1.65; color:#8A7A6A; margin:0 0 20px; flex:1">{{ c.desc }}</p>
+            <h3 style="font-family:'Fraunces',serif; font-size:26px; font-weight:700; line-height:1.15; margin:0 0 20px; text-wrap:pretty">{{ c.name }}</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px">
               <sc-for list="{{ c.tags }}" as="tag" hint-placeholder-count="3">
                 <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; padding:6px 14px; border-radius:100px; border:1px solid {{ tag.border }}; background:{{ tag.bg }}; color:{{ tag.color }}">{{ tag.label }}</span>
