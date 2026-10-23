@@ -224,7 +224,12 @@
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
         <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
           <div style="height:260px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:{{ c.thumb }}">
-            <span style="font-size:64px; opacity:.8">{{ c.emoji }}</span>
+            <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ c.img }}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center"></img>
+            </sc-if>
+            <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:64px; opacity:.8">{{ c.emoji }}</span>
+            </sc-if>
           </div>
           <div style="padding:28px; display:flex; flex-direction:column; flex:1">
             <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; margin-bottom:12px; display:flex; align-items:center; gap:8px">
@@ -252,7 +257,13 @@
         <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A; margin-bottom:24px; display:flex; align-items:center; gap:12px">
           {{ art.eyebrow }}<span style="flex:1; max-width:40px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
         </div>
-        <h2 data-reveal="up" style="font-family:'Fraunces',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1; letter-spacing:-1.5px; margin:0">{{ art.title1 }} <span style="font-style:italic; color:#8B1A2E">{{ art.title2 }}</span></h2>
+        <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap">
+          <h2 data-reveal="up" style="font-family:'Fraunces',serif; font-size:clamp(40px,5vw,64px); font-weight:900; line-height:1; letter-spacing:-1.5px; margin:0">{{ art.title1 }} <span style="font-style:italic; color:#8B1A2E">{{ art.title2 }}</span></h2>
+          <a href="{{ art.orderHref }}" target="_blank" data-reveal="up" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:12px 22px; border-radius:100px; background:#8B1A2E; color:#fff; text-decoration:none; display:inline-flex; align-items:center; gap:8px; cursor:none; transition:transform .2s, background .2s" style-hover="background:#6E1424; transform:translateY(-2px)">
+            {{ art.order }}
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none" style="flex-shrink:0"><path d="M1.5 11.5L11.5 1.5M11.5 1.5H4.5M11.5 1.5V8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
       </div>
       <p data-reveal="up" data-reveal-delay=".1s" style="font-family:'Fraunces',serif; font-size:18px; font-style:italic; color:#8A7A6A; max-width:400px; text-align:right; line-height:1.5; margin:0">{{ art.quote }}</p>
     </div>
@@ -416,7 +427,7 @@ class Component extends DCLogic {
           originQuote: '"Born in the heart of Brazil\u2019s Cerrado, driven by curiosity and the need to create meaningful solutions."'
         },
         work: { eyebrow: 'Selected work', title1: 'Projects that', title2: 'matter.', filterAll: 'All', viewCase: 'View case study →' },
-        art: { eyebrow: 'Beyond the screen', title1: 'Art &', title2: 'Craft.', quote: '"Connected with art in so many ways and pixels."' },
+        art: { eyebrow: 'Beyond the screen', title1: 'Art &', title2: 'Craft.', quote: '"Connected with art in so many ways and pixels."', order: 'Place an order', orderHref: 'https://wa.me/5534998937137?text=Hi%20Naiandra!%20I%27d%20like%20to%20place%20an%20art%20order.' },
         contact: {
           eyebrow: 'Get in touch', title1: "Let's build", title2: 'something', title3: 'great.',
           sub: 'Open for freelance projects, collaborations, and global opportunities.',
@@ -435,7 +446,7 @@ class Component extends DCLogic {
           { name: 'Collaboration', sub: 'Cross-functional', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Complete design system with semantic tokens, 14 color primitives at WCAG AAA, and 3 visualization modes for an interactive Periodic Table.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/mockup-table-overview.svg', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Complete design system with semantic tokens, 14 color primitives at WCAG AAA, and 3 visualization modes for an interactive Periodic Table.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
           { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Social Impact', name: 'Zup Innovation × Itaú', desc: 'Scalable, inclusive solutions across 4 digital products — Coda Mundo and Coda Hub — focused on AI, gamification and digital literacy.', tags: ['Design System*', 'UX/UI', 'Gamification', 'AI'] },
           { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'End-to-end design for a logistics platform connecting carriers and shippers across Europe — simplifying complex freight operations.', tags: ['UX Research', 'B2B', 'SaaS'] },
           { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Mobile payment experience focused on simplicity and trust — making financial transactions accessible for everyone.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
@@ -462,7 +473,7 @@ class Component extends DCLogic {
           originQuote: '"Nacida en el corazón del Cerrado brasileño, movida por la curiosidad y por la necesidad de crear soluciones con significado."'
         },
         work: { eyebrow: 'Proyectos seleccionados', title1: 'Proyectos que', title2: 'importan.', filterAll: 'Todos', viewCase: 'Ver caso →' },
-        art: { eyebrow: 'Más allá de la pantalla', title1: 'Arte &', title2: 'Oficio.', quote: '"Conectada con el arte de tantas formas y píxeles."' },
+        art: { eyebrow: 'Más allá de la pantalla', title1: 'Arte &', title2: 'Oficio.', quote: '"Conectada con el arte de tantas formas y píxeles."', order: 'Haz tu pedido', orderHref: 'https://wa.me/5534998937137?text=%C2%A1Hola%20Naiandra!%20Me%20gustar%C3%ADa%20hacer%20un%20pedido%20de%20arte.' },
         contact: {
           eyebrow: 'Hablemos', title1: 'Creemos', title2: 'algo', title3: 'increíble.',
           sub: 'Abierta a proyectos freelance, colaboraciones y oportunidades globales.',
@@ -481,7 +492,7 @@ class Component extends DCLogic {
           { name: 'Colaboración', sub: 'Multidisciplinar', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo con tokens semánticos, 14 primitivas de color en WCAG AAA y 3 modos de visualización para una Tabla Periódica interactiva.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/mockup-table-overview.svg', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo con tokens semánticos, 14 primitivas de color en WCAG AAA y 3 modos de visualización para una Tabla Periódica interactiva.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
           { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Impacto Social', name: 'Zup Innovation × Itaú', desc: 'Soluciones escalables e inclusivas en 4 productos digitales — Coda Mundo y Coda Hub — con foco en IA, gamificación y alfabetización digital.', tags: ['Design System*', 'UX/UI', 'Gamificación', 'IA'] },
           { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'Diseño end-to-end para una plataforma de logística que conecta transportistas y cargadores en Europa — simplificando operaciones complejas de flete.', tags: ['UX Research', 'B2B', 'SaaS'] },
           { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Experiencia de pago móvil centrada en la simplicidad y la confianza — haciendo las transacciones financieras accesibles para todos.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
@@ -508,7 +519,7 @@ class Component extends DCLogic {
           originQuote: '"Nascida no coração do Cerrado brasileiro, movida pela curiosidade e pela necessidade de criar soluções com significado."'
         },
         work: { eyebrow: 'Projetos selecionados', title1: 'Projetos que', title2: 'importam.', filterAll: 'Todos', viewCase: 'Ver case →' },
-        art: { eyebrow: 'Além da tela', title1: 'Arte &', title2: 'Craft.', quote: '"Conectada com a arte de tantas formas e pixels."' },
+        art: { eyebrow: 'Além da tela', title1: 'Arte &', title2: 'Craft.', quote: '"Conectada com a arte de tantas formas e pixels."', order: 'Faça sua encomenda', orderHref: 'https://wa.me/5534998937137?text=Oi%20Naiandra!%20Quero%20fazer%20uma%20encomenda%20de%20arte.' },
         contact: {
           eyebrow: 'Bora conversar', title1: 'Vamos criar', title2: 'algo', title3: 'incrível?!',
           sub: 'Aberta para projetos freelance, colaborações e oportunidades globais.',
@@ -527,7 +538,7 @@ class Component extends DCLogic {
           { name: 'Colaboração', sub: 'Multidisciplinar', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo com tokens semânticos, 14 primitivas de cor em WCAG AAA e 3 modos de visualização para uma Tabela Periódica interativa.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/mockup-table-overview.svg', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo com tokens semânticos, 14 primitivas de cor em WCAG AAA e 3 modos de visualização para uma Tabela Periódica interativa.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
           { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Impacto Social', name: 'Zup Innovation × Itaú', desc: 'Soluções escaláveis e inclusivas em 4 produtos digitais — Coda Mundo e Coda Hub — com foco em IA, gamificação e letramento digital.', tags: ['Design System*', 'UX/UI', 'Gamificação', 'IA'] },
           { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'Design end-to-end para uma plataforma de logística que conecta transportadoras e embarcadores na Europa — simplificando operações complexas de frete.', tags: ['UX Research', 'B2B', 'SaaS'] },
           { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Experiência de pagamento mobile focada em simplicidade e confiança — tornando transações financeiras acessíveis para todos.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
@@ -545,6 +556,7 @@ class Component extends DCLogic {
     const artFiles = ['assets/art-13.jpg', 'assets/art-02.jpg', 'assets/art-03.jpg', 'assets/art-05.jpg', 'assets/art-06.jpg', 'assets/art-12.jpg', 'assets/art-09.jpg', 'assets/art-10.jpg', 'assets/art-07.png', 'assets/art-14.jpg', 'assets/art-15.jpg', 'assets/art-16.jpg', 'assets/art-18.jpg', 'assets/art-19.jpg', 'assets/art-01.jpg', 'assets/art-08.jpg', 'assets/art-11.jpg'];
     const artDots = ['#8B1A2E', '#F0C93A', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#E8909D', '#E8909D', '#F0C93A', '#F0C93A', '#8B1A2E', '#F0C93A', '#E8909D', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E'];
     const cases = t.cases.map((c) => Object.assign({}, c, {
+      noImg: !c.img,
       tags: c.tags.map((label) => {
         const pink = label.endsWith('*');
         const clean = pink ? label.slice(0, -1) : label;

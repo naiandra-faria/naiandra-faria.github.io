@@ -48,17 +48,7 @@
     </div>
   </nav>
 
-  <div style="max-width:1180px; margin:0 auto; padding:64px clamp(20px,5vw,48px) 0; display:flex; align-items:center; gap:20px; flex-wrap:wrap">
-    <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A7A6A">{{ ui.switchLabel }}</span>
-    <span style="flex:1; min-width:20px; height:1px; background:rgba(28,20,16,0.1); display:block"></span>
-    <div style="display:flex; gap:10px; flex-wrap:wrap">
-      <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="2">
-        <button onClick="{{ tb.go }}" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:12px 22px; border-radius:100px; border:1.5px solid {{ tb.border }}; background:{{ tb.bg }}; color:{{ tb.fg }}; cursor:none; transition:all .2s">{{ tb.label }}</button>
-      </sc-for>
-    </div>
-  </div>
-
-  <section style="max-width:1180px; margin:0 auto; padding:56px clamp(20px,5vw,48px) 80px; display:flex; flex-wrap:wrap; gap:40px 56px; align-items:flex-start">
+  <section style="max-width:1180px; margin:0 auto; padding:72px clamp(20px,5vw,48px) 80px; display:flex; flex-wrap:wrap; gap:40px 56px; align-items:flex-start">
     <div style="flex:1 1 520px; min-width:280px">
       <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8B1A2E; margin-bottom:26px; display:flex; align-items:center; gap:10px">
         <span style="width:24px; height:1px; background:#8B1A2E; display:block"></span>{{ c.eyebrow }}
