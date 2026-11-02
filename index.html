@@ -113,7 +113,7 @@
       </h2>
       <p data-reveal="up" style="font-size:17px; line-height:1.75; color:#8A7A6A; margin:0 0 20px">{{ about.p1 }}</p>
       <p data-reveal="up" style="font-size:17px; line-height:1.75; color:#8A7A6A; margin:0 0 20px">{{ about.p2 }}</p>
-      <p data-reveal="up" style="font-size:17px; line-height:1.75; color:#8A7A6A; margin:0 0 20px"><em>{{ about.quote }}</em></p>
+      <blockquote data-reveal="up" style="margin:8px 0 28px; padding:4px 0 4px 22px; border-left:3px solid #8B1A2E; font-family:'Fraunces',serif; font-size:21px; font-style:italic; line-height:1.45; color:#1C1410; text-wrap:pretty">{{ about.quote }}</blockquote>
 
       <div data-reveal="up" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(28,20,16,0.1); border:1px solid rgba(28,20,16,0.1); border-radius:12px; overflow:hidden; margin-top:48px">
         <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="4">
@@ -224,9 +224,6 @@
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
         <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
           <div style="height:260px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:{{ c.thumb }}">
-            <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}">
-              <img src="{{ c.img }}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center"></img>
-            </sc-if>
             <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ true }}">
               <span style="font-size:64px; opacity:.8">{{ c.emoji }}</span>
             </sc-if>
@@ -235,7 +232,8 @@
             <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#8A7A6A; margin-bottom:12px; display:flex; align-items:center; gap:8px">
               <span style="width:12px; height:1px; background:#8A7A6A; display:block"></span>{{ c.eyebrow }}
             </div>
-            <h3 style="font-family:'Fraunces',serif; font-size:26px; font-weight:700; line-height:1.15; margin:0 0 20px; text-wrap:pretty">{{ c.name }}</h3>
+            <h3 style="font-family:'Fraunces',serif; font-size:26px; font-weight:700; line-height:1.15; margin:0 0 10px; text-wrap:pretty">{{ c.name }}<sc-if value="{{ c.client }}" hint-placeholder-val="{{ false }}"><span style="display:block; font-size:18px; font-weight:400; font-style:italic; color:#8A7A6A; margin-top:4px">{{ c.client }}</span></sc-if></h3>
+            <p style="font-size:14px; line-height:1.6; color:#5C4E42; margin:0 0 20px; max-width:46ch; text-wrap:pretty; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden">{{ c.desc }}</p>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px">
               <sc-for list="{{ c.tags }}" as="tag" hint-placeholder-count="3">
                 <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; padding:6px 14px; border-radius:100px; border:1px solid {{ tag.border }}; background:{{ tag.bg }}; color:{{ tag.color }}">{{ tag.label }}</span>
@@ -419,9 +417,9 @@ class Component extends DCLogic {
         },
         about: {
           eyebrow: 'Who I am', title1: 'Psychology', title2: 'meets', title3: 'Design.',
-          p1: "I'm a Product Designer who came from Psychology — and that's not a detail, it's the core of everything I do. Every decision I make is grounded in how humans think, feel, and behave.",
-          p2: 'I work end-to-end: from research and strategy to polished interfaces and scalable design systems. Curious, self-taught, and collaborative by nature.',
-          quote: '"Art of creating is what moves me. Design is how I dance with the world."',
+          p1: 'I\'m a deeply creative psychologist who moved into tech to build products that truly connect. Every decision I make is grounded in how people think, feel, and behave.',
+          p2: 'Curious, self-taught, and collaborative by nature.',
+          quote: '"The art of creating is what moves me. Design is how I dance with the world."',
           skillsEyebrow: 'What I do best', stackEyebrow: 'Current stack',
           originQuote: '"Born in the heart of Brazil\u2019s Cerrado, driven by curiosity and the need to create meaningful solutions."'
         },
@@ -442,13 +440,14 @@ class Component extends DCLogic {
           { name: 'UX Research', sub: 'Testing · Interviews', dot: '#E8909D' },
           { name: 'Accessibility', sub: 'WCAG AAA', dot: '#8B1A2E' },
           { name: 'Figma Expert', sub: 'Advanced · MCP', dot: '#F0C93A' },
-          { name: 'Collaboration', sub: 'Cross-functional', dot: '#E8909D' }
+          { name: 'Collaboration', sub: 'Cross-functional', dot: '#E8909D' },
+          { name: 'HTML & JavaScript', sub: 'Prototyping in code', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Complete design system with semantic tokens, 14 color primitives at WCAG AAA, and 3 visualization modes for an interactive Periodic Table.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
-          { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Social Impact', name: 'Zup Innovation × Itaú', desc: 'Scalable, inclusive solutions across 4 digital products — Coda Mundo and Coda Hub — focused on AI, gamification and digital literacy.', tags: ['Design System*', 'UX/UI', 'Gamification', 'AI'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'End-to-end design for a logistics platform connecting carriers and shippers across Europe — simplifying complex freight operations.', tags: ['UX Research', 'B2B', 'SaaS'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Mobile payment experience focused on simplicity and trust — making financial transactions accessible for everyone.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=3', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign and refresh of digital education products — from learning collections to interactive experiences.', tags: ['Design System', 'Figma Variables', 'Accessibility'] },
+          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=3', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Gamified education products that broaden access to technology for low-income communities.', tags: ['Design System', 'Gamification', 'AI'] },
+          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'Mobile app to track trucks and issue an invoice at every refuel in Peru, simplifying expense reports.', tags: ['Design System', 'UX Research', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Self-service kiosk and white-label finance app, adaptable to multiple brands.', tags: ['Design System', 'Information Architecture', 'Mobile'] }
         ],
         artCaptions: ['Decorative piece — Mindful Love', 'Painted canvas & fuzzy Christmas tree', 'Cold porcelain pendants', 'Wall mandala', '“Girl power” glasses case', 'Galaxy glasses case', '“Intention & Presence” mural', '“Intuition” keychain', 'Figgy — Figma mascot illustration', 'Bridesmaid jewelry box', 'Canvas — “Love is a choice”', 'Maternity plaque', '“Blessed You Are” plaque', '“Citrino Branding” glasses case', 'Geek coasters', 'Cute coaster', 'Blue-print necklace'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psychology × Design', 'Accessibility WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -465,8 +464,8 @@ class Component extends DCLogic {
         },
         about: {
           eyebrow: 'Quién soy', title1: 'Psicología', title2: 'se encuentra con', title3: 'Diseño.',
-          p1: 'Soy Product Designer y vengo de la Psicología — y eso no es un detalle, es el núcleo de todo lo que hago. Cada decisión que tomo se basa en cómo las personas piensan, sienten y se comportan.',
-          p2: 'Trabajo end-to-end: desde investigación y estrategia hasta interfaces refinadas y design systems escalables. Curiosa, autodidacta y colaborativa por naturaleza.',
+          p1: 'Soy una psicóloga muy creativa que llegó a la tecnología para crear productos que conectan de verdad. Cada decisión que tomo se basa en cómo las personas piensan, sienten y se comportan.',
+          p2: 'Curiosa, autodidacta y colaborativa por naturaleza.',
           quote: '"El arte de crear es lo que me mueve. El diseño es cómo bailo con el mundo."',
           skillsEyebrow: 'Lo que hago mejor', stackEyebrow: 'Stack actual',
           originQuote: '"Nacida en el corazón del Cerrado brasileño, movida por la curiosidad y por la necesidad de crear soluciones con significado."'
@@ -488,13 +487,14 @@ class Component extends DCLogic {
           { name: 'UX Research', sub: 'Tests · Entrevistas', dot: '#E8909D' },
           { name: 'Accesibilidad', sub: 'WCAG AAA', dot: '#8B1A2E' },
           { name: 'Figma Expert', sub: 'Avanzado · MCP', dot: '#F0C93A' },
-          { name: 'Colaboración', sub: 'Multidisciplinar', dot: '#E8909D' }
+          { name: 'Colaboración', sub: 'Multidisciplinar', dot: '#E8909D' },
+          { name: 'HTML & JavaScript', sub: 'Prototipado en código', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo con tokens semánticos, 14 primitivas de color en WCAG AAA y 3 modos de visualización para una Tabla Periódica interactiva.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
-          { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Impacto Social', name: 'Zup Innovation × Itaú', desc: 'Soluciones escalables e inclusivas en 4 productos digitales — Coda Mundo y Coda Hub — con foco en IA, gamificación y alfabetización digital.', tags: ['Design System*', 'UX/UI', 'Gamificación', 'IA'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'Diseño end-to-end para una plataforma de logística que conecta transportistas y cargadores en Europa — simplificando operaciones complejas de flete.', tags: ['UX Research', 'B2B', 'SaaS'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Experiencia de pago móvil centrada en la simplicidad y la confianza — haciendo las transacciones financieras accesibles para todos.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=3', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Rediseño y actualización de productos educativos digitales — de acervos didácticos a experiencias interactivas.', tags: ['Design System', 'Figma Variables', 'Accesibilidad'] },
+          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=3', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Productos educativos gamificados que amplían el acceso a la tecnología de personas de bajos ingresos.', tags: ['Design System', 'Gamificación', 'IA'] },
+          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App móvil para rastrear camiones y emitir factura en cada carga de combustible en Perú, simplificando la rendición de cuentas.', tags: ['Design System', 'UX Research', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Tótem de autoservicio y app financiera white label, adaptable a múltiples marcas.', tags: ['Design System', 'Arquitectura de Información', 'Mobile'] }
         ],
         artCaptions: ['Pieza decorativa — Amor Consciente', 'Lienzos y árbol de Navidad peludo', 'Colgantes de porcelana fría', 'Mandala en la pared', 'Funda de gafas "girl power"', 'Funda de gafas galaxia', 'Mural "Intención y Presencia"', 'Llavero "Intuición"', 'Ilustración de la mascota Figgy', 'Joyero para madrinas', 'Lienzo — "El amor es una elección"', 'Placa de maternidad', 'Placa "Bendecida Eres"', 'Funda de gafas "Branding Citrino"', 'Portavasos geek', 'Portavasos bonito', 'Collar con estampado azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicología × Diseño', 'Accesibilidad WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -511,8 +511,8 @@ class Component extends DCLogic {
         },
         about: {
           eyebrow: 'Quem eu sou', title1: 'Psicologia', title2: 'encontra', title3: 'Design.',
-          p1: 'Sou Product Designer que veio da Psicologia — e isso não é detalhe, é o núcleo de tudo que faço. Cada decisão que tomo é fundamentada em como as pessoas pensam, sentem e se comportam.',
-          p2: 'Trabalho end-to-end: de pesquisa e estratégia a interfaces refinadas e design systems escaláveis. Curiosa, autodidata e colaborativa por natureza.',
+          p1: 'Sou uma psicóloga muito criativa, que entrou na tecnologia para criar produtos que conectam de verdade. Cada decisão que tomo é fundamentada em como as pessoas pensam, sentem e se comportam.',
+          p2: 'Sou curiosa, autodidata e colaborativa por natureza.',
           quote: '"A arte de criar é o que me move. Design é como eu danço com o mundo."',
           skillsEyebrow: 'O que faço de melhor', stackEyebrow: 'Stack atual',
           originQuote: '"Nascida no coração do Cerrado brasileiro, movida pela curiosidade e pela necessidade de criar soluções com significado."'
@@ -534,13 +534,14 @@ class Component extends DCLogic {
           { name: 'UX Research', sub: 'Testes · Entrevistas', dot: '#E8909D' },
           { name: 'Acessibilidade', sub: 'WCAG AAA', dot: '#8B1A2E' },
           { name: 'Figma Expert', sub: 'Avançado · MCP', dot: '#F0C93A' },
-          { name: 'Colaboração', sub: 'Multidisciplinar', dot: '#E8909D' }
+          { name: 'Colaboração', sub: 'Multidisciplinar', dot: '#E8909D' },
+          { name: 'HTML & JavaScript', sub: 'Prototipação em código', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech · Design System', name: 'FTD Educação — Grupo Marista', desc: 'Design system completo com tokens semânticos, 14 primitivas de cor em WCAG AAA e 3 modos de visualização para uma Tabela Periódica interativa.', tags: ['Figma Variables*', 'Tokens', 'WCAG AAA'] },
-          { href: 'case-studies.html#zup', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: 'FinTech · Impacto Social', name: 'Zup Innovation × Itaú', desc: 'Soluções escaláveis e inclusivas em 4 produtos digitais — Coda Mundo e Coda Hub — com foco em IA, gamificação e letramento digital.', tags: ['Design System*', 'UX/UI', 'Gamificação', 'IA'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'Design end-to-end para uma plataforma de logística que conecta transportadoras e embarcadores na Europa — simplificando operações complexas de frete.', tags: ['UX Research', 'B2B', 'SaaS'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Experiência de pagamento mobile focada em simplicidade e confiança — tornando transações financeiras acessíveis para todos.', tags: ['FinTech*', 'Mobile', 'UX/UI'] }
+          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=3', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign e atualização de produtos digitais de educação — de acervos didáticos a experiências interativas.', tags: ['Design System', 'Figma Variables', 'Acessibilidade'] },
+          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=3', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Produtos educacionais gamificados que ampliam o acesso de pessoas de baixa renda à tecnologia.', tags: ['Design System', 'Gamificação', 'IA'] },
+          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App mobile para rastrear caminhões e emitir nota fiscal a cada abastecimento no Peru, simplificando a prestação de contas.', tags: ['Design System', 'UX Research', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Totem de autoatendimento e app financeiro white label, adaptável a múltiplas marcas.', tags: ['Design System', 'Arquitetura da Informação', 'Mobile'] }
         ],
         artCaptions: ['Quadro decorativo - Amor Ciente', 'Telas e árvore de natal felpuda', 'Pingentes de cerâmica fria', 'Mandala na parede', 'Porta óculos girl power', 'Porta óculos galáxia', 'Mural Intenção y Presença', 'Porta-chaves Intuição', 'Ilustra mascote Figgy', 'Porta joias para madrinhas', 'Tela - O amor é uma escolha', 'Placa de maternidade', 'Quadrinho Abençoada És', 'Porta óculos Branding Citrino', 'Porta copos geek', 'Porta-copos fofo', 'Colar estampa azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicologia × Design', 'Acessibilidade WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -556,6 +557,7 @@ class Component extends DCLogic {
     const artDots = ['#8B1A2E', '#F0C93A', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#E8909D', '#E8909D', '#F0C93A', '#F0C93A', '#8B1A2E', '#F0C93A', '#E8909D', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E'];
     const cases = t.cases.map((c) => Object.assign({}, c, {
       noImg: !c.img,
+      thumb: c.img ? 'url("' + c.img + '") center / cover no-repeat, ' + c.thumb : c.thumb,
       tags: c.tags.map((label) => {
         const pink = label.endsWith('*');
         const clean = pink ? label.slice(0, -1) : label;
