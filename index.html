@@ -222,7 +222,7 @@
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px">
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
-        <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
+        <a href="{{ c.href }}" target="{{ c.target }}" rel="{{ c.rel }}" data-case-idx="{{ c.idx }}" data-reveal="{{ c.reveal }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
           <div style="aspect-ratio:690 / 520; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:{{ c.thumb }}">
             <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ true }}">
               <span style="font-size:64px; opacity:.8">{{ c.emoji }}</span>
@@ -298,6 +298,31 @@
                 </div>
               </div>
               <div style="position:absolute; inset:0; z-index:5; background:url('assets/cases/ftd/thumb-ftd.png?v=4') center / cover no-repeat, #F3EEE4; opacity:{{ c.coverOp }}; transition:opacity .5s ease"></div>
+            </sc-if>
+            <sc-if value="{{ c.isOntruck }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; background:linear-gradient(140deg,#7466DC 0%,#5A7FE0 50%,#3C8AD8 100%)"></div>
+              <div style="position:absolute; inset:-10%; background-image:linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px); background-size:34px 34px; transform:rotate(-8deg); -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 85%); mask-image:radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 85%)"></div>
+              <div style="position:absolute; left:50%; top:52%; width:62%; height:82%; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle, rgba(170,200,255,0.45), transparent 65%)"></div>
+              <div style="position:absolute; left:6%; top:34%; width:40%; height:52%; border:2px dashed rgba(255,255,255,0.5); border-right:none; border-bottom:none; border-radius:100% 0 0 0; box-sizing:border-box"></div>
+              <div style="position:absolute; right:6%; top:20%; width:40%; height:52%; border:2px dashed rgba(255,255,255,0.5); border-left:none; border-top:none; border-radius:0 0 100% 0; box-sizing:border-box"></div>
+              <span style="position:absolute; left:6%; top:86%; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center"><span style="width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(20,16,60,0.3); display:flex; align-items:center; justify-content:center"><span style="width:5px; height:5px; border-radius:50%; background:#6D5BD8; display:block"></span></span></span>
+              <span style="position:absolute; right:6%; top:20%; transform:translate(50%,-50%) scale({{ c.pinS }}); width:28px; height:28px; border-radius:50%; background:{{ c.pinRing }}; box-shadow:{{ c.pinGlow }}; transition:{{ c.pinT }}; display:flex; align-items:center; justify-content:center"><span style="width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(20,16,60,0.3); display:flex; align-items:center; justify-content:center"><span style="width:6px; height:6px; border-radius:50%; background:{{ c.pinCore }}; transition:{{ c.pinT }}; display:block"></span></span></span>
+              <div style="position:absolute; right:6%; top:20%; width:40%; height:52%; z-index:1; pointer-events:none">
+                <div style="position:absolute; top:0; left:{{ c.tkX }}; width:0; height:100%; transition:{{ c.tkTx }}">
+                  <div style="position:absolute; left:0; top:{{ c.tkY }}; opacity:{{ c.tkOp }}; transition:{{ c.tkTy }}">
+                    <div style="position:absolute; left:0; top:0; width:30px; height:16px; transform:translate(-50%,-50%) rotate({{ c.tkR }}); transition:{{ c.tkTr }}; filter:drop-shadow(0 3px 4px rgba(20,16,60,0.35))">
+                      <span style="position:absolute; left:0; top:0; width:19px; height:12px; border-radius:2px; background:#FFC83D; display:block"></span>
+                      <span style="position:absolute; left:20px; top:3px; width:10px; height:9px; border-radius:2px 4px 1px 1px; background:#1E1B4B; display:block"></span>
+                      <span style="position:absolute; left:24px; top:4.5px; width:4px; height:3px; border-radius:1px 2px 0 0; background:#BFD8FF; display:block"></span>
+                      <span style="position:absolute; left:3px; top:11px; width:5px; height:5px; border-radius:50%; background:#1E1B4B; box-shadow:0 0 0 1.5px #fff; display:block"></span>
+                      <span style="position:absolute; left:22px; top:11px; width:5px; height:5px; border-radius:50%; background:#1E1B4B; box-shadow:0 0 0 1.5px #fff; display:block"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="position:absolute; left:50%; top:50%; width:31%; aspect-ratio:0.457; z-index:2; border-radius:24px; background:#0B0B0C; padding:1.1%; box-sizing:border-box; box-shadow:0 34px 50px -18px rgba(20,16,60,0.6); transform:translate(-50%,{{ c.ontY }}) rotate({{ c.ontR }}); transition:transform .7s cubic-bezier(.4,0,.2,1)">
+                <div style="width:100%; height:100%; border-radius:19px; background:url('assets/cases/ontruck/screen-home.png') top center / cover no-repeat, #F4F5F8"></div>
+              </div>
             </sc-if>
             <sc-if value="{{ c.multi }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute; left:0; right:0; bottom:8px; display:flex; justify-content:center; gap:2px; z-index:5" onMouseLeave="{{ c.dotsLeave }}">
@@ -451,6 +476,26 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    this.touchMode = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+    if (this.touchMode && 'IntersectionObserver' in window) {
+      this.caseObs = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          const el = en.target, ci = +el.getAttribute('data-case-idx');
+          const vids = el.querySelectorAll('video[data-hover-video]');
+          if (en.intersectionRatio >= 0.6) {
+            if (this.state.caseHover === ci) return;
+            this.startSlides(ci, this.caseCounts ? this.caseCounts[ci] : 0);
+            vids.forEach((v) => { v.muted = true; v.loop = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); });
+          } else if (this.state.caseHover === ci) {
+            this.stopSlides();
+            this.setState({ vPlay: null });
+            vids.forEach((v) => v.pause());
+          }
+        });
+      }, { threshold: [0, 0.6, 1] });
+      const attach = () => document.querySelectorAll('a[data-case-idx]').forEach((el) => { if (!el.__obs) { el.__obs = 1; this.caseObs.observe(el); } });
+      attach(); this.obsT = setTimeout(attach, 800); this.obsT2 = setTimeout(attach, 2500);
+    }
     try { const l = localStorage.getItem('nai-lang'); if (l === 'en' || l === 'pt' || l === 'es') this.setState({ lang: l }); } catch (e) {}
     this.mx = 0; this.my = 0; this.rx = 0; this.ry = 0;
     this.onMove = (e) => {
@@ -482,7 +527,8 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.slideT);
+    clearTimeout(this.slideT); clearTimeout(this.obsT); clearTimeout(this.obsT2);
+    if (this.caseObs) this.caseObs.disconnect();
     document.removeEventListener('mousemove', this.onMove);
     if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
     cancelAnimationFrame(this.raf);
@@ -577,7 +623,7 @@ class Component extends DCLogic {
           { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign and refresh of digital education products — from learning collections to interactive experiences.', tags: ['Design System', 'Figma Variables', 'Accessibility'] },
           { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Gamified education products that broaden access to technology for low-income communities.', tags: ['Design System', 'Gamification', 'AI'] },
           { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Self-service kiosk and white-label finance app, adaptable to multiple brands.', tags: ['Design System', 'Information Architecture', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'Mobile app to track trucks and issue an invoice at every refuel in Peru, simplifying expense reports.', tags: ['Design System', 'UX Research', 'Mobile'] }
+          { href: 'https://www.figma.com/proto/3cvy2VR9YaUWrIUHYIu03g/Core-do-Brasil---Biblioteca?page-id=1%3A2&node-id=184-3490&starting-point-node-id=264%3A3297&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=1', target: '_blank', rel: 'noopener', ontruckMock: true, reveal: 'right', emoji: '🚚', thumb: '#5F86E3', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'Mobile app to track trucks and issue an invoice at every refuel in Peru, simplifying expense reports.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Decorative piece — Mindful Love', 'Painted canvas & fuzzy Christmas tree', 'Cold porcelain pendants', 'Wall mandala', '“Girl power” glasses case', 'Galaxy glasses case', '“Intention & Presence” mural', '“Intuition” keychain', 'Figgy — Figma mascot illustration', 'Bridesmaid jewelry box', 'Canvas — “Love is a choice”', 'Maternity plaque', '“Blessed You Are” plaque', '“Citrino Branding” glasses case', 'Geek coasters', 'Cute coaster', 'Blue-print necklace'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psychology × Design', 'Accessibility WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -624,7 +670,7 @@ class Component extends DCLogic {
           { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Rediseño y actualización de productos educativos digitales — de acervos didácticos a experiencias interactivas.', tags: ['Design System', 'Figma Variables', 'Accesibilidad'] },
           { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Productos educativos gamificados que amplían el acceso a la tecnología de personas de bajos ingresos.', tags: ['Design System', 'Gamificación', 'IA'] },
           { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Tótem de autoservicio y app financiera white label, adaptable a múltiples marcas.', tags: ['Design System', 'Arquitectura de Información', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App móvil para rastrear camiones y emitir factura en cada carga de combustible en Perú, simplificando la rendición de cuentas.', tags: ['Design System', 'UX Research', 'Mobile'] }
+          { href: 'https://www.figma.com/proto/3cvy2VR9YaUWrIUHYIu03g/Core-do-Brasil---Biblioteca?page-id=1%3A2&node-id=184-3490&starting-point-node-id=264%3A3297&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=1', target: '_blank', rel: 'noopener', ontruckMock: true, reveal: 'right', emoji: '🚚', thumb: '#5F86E3', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App móvil para rastrear camiones y emitir factura en cada carga de combustible en Perú, simplificando la rendición de cuentas.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Pieza decorativa — Amor Consciente', 'Lienzos y árbol de Navidad peludo', 'Colgantes de porcelana fría', 'Mandala en la pared', 'Funda de gafas "girl power"', 'Funda de gafas galaxia', 'Mural "Intención y Presencia"', 'Llavero "Intuición"', 'Ilustración de la mascota Figgy', 'Joyero para madrinas', 'Lienzo — "El amor es una elección"', 'Placa de maternidad', 'Placa "Bendecida Eres"', 'Funda de gafas "Branding Citrino"', 'Portavasos geek', 'Portavasos bonito', 'Collar con estampado azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicología × Diseño', 'Accesibilidad WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -671,7 +717,7 @@ class Component extends DCLogic {
           { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign e atualização de produtos digitais de educação — de acervos didáticos a experiências interativas.', tags: ['Design System', 'Figma Variables', 'Acessibilidade'] },
           { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Produtos educacionais gamificados que ampliam o acesso de pessoas de baixa renda à tecnologia.', tags: ['Design System', 'Gamificação', 'IA'] },
           { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Totem de autoatendimento e app financeiro white label, adaptável a múltiplas marcas.', tags: ['Design System', 'Arquitetura da Informação', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App mobile para rastrear caminhões e emitir nota fiscal a cada abastecimento no Peru, simplificando a prestação de contas.', tags: ['Design System', 'UX Research', 'Mobile'] }
+          { href: 'https://www.figma.com/proto/3cvy2VR9YaUWrIUHYIu03g/Core-do-Brasil---Biblioteca?page-id=1%3A2&node-id=184-3490&starting-point-node-id=264%3A3297&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=1', target: '_blank', rel: 'noopener', ontruckMock: true, reveal: 'right', emoji: '🚚', thumb: '#5F86E3', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App mobile para rastrear caminhões e emitir nota fiscal a cada abastecimento no Peru, simplificando a prestação de contas.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Quadro decorativo - Amor Ciente', 'Telas e árvore de natal felpuda', 'Pingentes de cerâmica fria', 'Mandala na parede', 'Porta óculos girl power', 'Porta óculos galáxia', 'Mural Intenção y Presença', 'Porta-chaves Intuição', 'Ilustra mascote Figgy', 'Porta joias para madrinhas', 'Tela - O amor é uma escolha', 'Placa de maternidade', 'Quadrinho Abençoada És', 'Porta óculos Branding Citrino', 'Porta copos geek', 'Porta-copos fofo', 'Colar estampa azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicologia × Design', 'Acessibilidade WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -685,6 +731,7 @@ class Component extends DCLogic {
     const t = this.copy()[lang] || this.copy().en;
     const artFiles = ['assets/art-13.jpg', 'assets/art-02.jpg', 'assets/art-03.jpg', 'assets/art-05.jpg', 'assets/art-06.jpg', 'assets/art-12.jpg', 'assets/art-09.jpg', 'assets/art-10.jpg', 'assets/art-07.png', 'assets/art-14.jpg', 'assets/art-15.jpg', 'assets/art-16.jpg', 'assets/art-18.jpg', 'assets/art-19.jpg', 'assets/art-01.jpg', 'assets/art-08.jpg', 'assets/art-11.jpg'];
     const artDots = ['#8B1A2E', '#F0C93A', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#E8909D', '#E8909D', '#F0C93A', '#F0C93A', '#8B1A2E', '#F0C93A', '#E8909D', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E'];
+    this.caseCounts = t.cases.map((c) => (c.screens || c.desktop || c.imgs || (c.img ? [c.img] : [])).length);
     const cases = t.cases.map((c, ci) => {
       const screens = c.screens || null;
       const desk = c.desktop || null;
@@ -701,8 +748,24 @@ class Component extends DCLogic {
         h: { left: '40%', top: '25%', w: '20%', h: '55%', z: 0, b: 0.6, op: 0 }
       };
       return Object.assign({}, c, {
-      noImg: !count && !c.ftdMock,
+      noImg: !count && !c.ftdMock && !c.ontruckMock,
       isFtd: !!c.ftdMock,
+      idx: String(ci),
+      isOntruck: !!c.ontruckMock,
+      ontY: '-47%',
+      tkX: this.state.caseHover === ci ? '97.5%' : '0%',
+      tkY: this.state.caseHover === ci ? '22%' : '100%',
+      tkR: this.state.caseHover === ci ? '-72deg' : '0deg',
+      tkOp: this.state.caseHover === ci ? 1 : 0,
+      tkTx: this.state.caseHover === ci ? 'left 1.15s cubic-bezier(.61,1,.88,1) .3s' : 'none',
+      tkTy: this.state.caseHover === ci ? 'top 1.15s cubic-bezier(.12,0,.39,0) .3s, opacity .2s ease .3s' : 'none',
+      tkTr: this.state.caseHover === ci ? 'transform 1.15s cubic-bezier(.45,0,.55,1) .3s' : 'none',
+      pinS: this.state.caseHover === ci ? 1.15 : 1,
+      pinRing: this.state.caseHover === ci ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)',
+      pinGlow: this.state.caseHover === ci ? '0 0 0 7px rgba(255,255,255,0.14), 0 0 26px 8px rgba(120,255,200,0.55)' : '0 0 0 0 rgba(255,255,255,0)',
+      pinCore: this.state.caseHover === ci ? '#2FD38F' : '#3C8AD8',
+      pinT: this.state.caseHover === ci ? 'all .4s cubic-bezier(.3,1.6,.5,1) 1.4s' : 'all .25s ease',
+      ontR: '0deg',
       coverOp: this.state.caseHover === ci && this.state.vPlay === ci ? 0 : 1,
       vPlaying: () => { if (this.state.caseHover === ci) this.setState({ vPlay: ci }); },
       multi: count > 1,
@@ -722,8 +785,8 @@ class Component extends DCLogic {
       slides: imgs.map((src, j) => ({ bg: 'url("' + src + '") center / contain no-repeat', op: j === cur ? 1 : 0 })),
       dots: Array.from({ length: count }, (_, j) => ({ w: j === cur ? '18px' : '6px', op: j === cur ? 1 : 0.6, go: () => this.goSlide(ci, j, count), click: (e) => { e.preventDefault(); e.stopPropagation(); this.goSlide(ci, j, count); } })),
       dotsLeave: () => this.resumeSlides(ci, count),
-      enter: (e) => { this.startSlides(ci, count); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.muted = true; v.loop = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }); },
-      leave: (e) => { this.stopSlides(); this.setState({ vPlay: null }); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.pause(); }); },
+      enter: (e) => { if (this.touchMode) return; this.startSlides(ci, count); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.muted = true; v.loop = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }); },
+      leave: (e) => { if (this.touchMode) return; this.stopSlides(); this.setState({ vPlay: null }); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.pause(); }); },
       tags: c.tags.map((label) => {
         const pink = label.endsWith('*');
         const clean = pink ? label.slice(0, -1) : label;
