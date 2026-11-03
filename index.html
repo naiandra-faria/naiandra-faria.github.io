@@ -222,10 +222,91 @@
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px">
       <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
-        <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
+        <a href="{{ c.href }}" data-reveal="{{ c.reveal }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="background:#FAF7F0; border-radius:16px; overflow:hidden; border:2px solid transparent; transition:transform .3s, box-shadow .3s, border-color .25s; text-decoration:none; color:#1C1410; display:flex; flex-direction:column; outline:1px solid rgba(28,20,16,0.1)" style-hover="border-color:#8B1A2E; outline-color:transparent; transform:translateY(-4px); box-shadow:0 12px 40px rgba(139,26,46,0.12)">
           <div style="aspect-ratio:690 / 520; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:{{ c.thumb }}">
             <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ true }}">
               <span style="font-size:64px; opacity:.8">{{ c.emoji }}</span>
+            </sc-if>
+            <sc-for list="{{ c.slides }}" as="s" hint-placeholder-count="0">
+              <div style="position:absolute; inset:0; background:{{ s.bg }}; opacity:{{ s.op }}; transition:opacity .7s ease"></div>
+            </sc-for>
+            <sc-if value="{{ c.isPhones }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; width:72.5%; height:96%; border-radius:50%; background:#0050F4; right:-17.4%; top:-17.3%"></div>
+              <div style="position:absolute; width:14.2%; height:18.8%; background:#FFBD00; left:-3%; top:60%; border-radius:4px; transform:rotate(-9deg)"></div>
+              <div style="position:absolute; width:12.2%; height:16.2%; background:#232427; left:4.3%; top:79%; border-radius:4px; transform:rotate(-9deg)"></div>
+              <div style="position:absolute; width:15.9%; height:21.2%; background:#232427; right:-4.9%; top:11.9%; border-radius:4px; transform:rotate(-9deg)"></div>
+              <div style="position:absolute; width:8.4%; height:11.2%; background:#FFBD00; right:2.8%; top:31%; border-radius:3px; transform:rotate(-9deg)"></div>
+              <sc-for list="{{ c.phones }}" as="p" hint-placeholder-count="0">
+                <div style="position:absolute; left:{{ p.left }}; top:{{ p.top }}; width:{{ p.w }}; height:{{ p.h }}; z-index:{{ p.z }}; opacity:{{ p.op }}; filter:brightness({{ p.b }}); border-radius:16px; background:#0B0B0C; padding:4px; box-sizing:border-box; box-shadow:0 22px 34px -14px rgba(0,10,40,0.65); transition:left .8s cubic-bezier(.4,0,.2,1), top .8s cubic-bezier(.4,0,.2,1), width .8s cubic-bezier(.4,0,.2,1), height .8s cubic-bezier(.4,0,.2,1), filter .8s ease, opacity .5s ease">
+                  <div style="width:100%; height:100%; border-radius:12px; background:{{ p.bg }}"></div>
+                </div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ c.isDesktop }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; background:radial-gradient(ellipse 70% 55% at 50% 92%, rgba(38,140,112,0.55), transparent 70%), linear-gradient(180deg,#0A1A38 0%,#0D2442 45%,#123A3A 100%)"></div>
+              <div style="position:absolute; left:4%; top:14%; width:22%; height:10%; opacity:.35">
+                <span style="position:absolute; left:0; bottom:0; width:100%; height:45%; border-radius:40px; background:#1C3560; display:block"></span>
+                <span style="position:absolute; left:18%; bottom:22%; width:38%; height:90%; border-radius:50%; background:#1C3560; display:block"></span>
+                <span style="position:absolute; left:46%; bottom:20%; width:30%; height:70%; border-radius:50%; background:#1C3560; display:block"></span>
+              </div>
+              <div style="position:absolute; right:3%; top:6%; width:26%; height:11%; opacity:.3">
+                <span style="position:absolute; left:0; bottom:0; width:100%; height:42%; border-radius:40px; background:#1C3560; display:block"></span>
+                <span style="position:absolute; left:14%; bottom:20%; width:34%; height:80%; border-radius:50%; background:#1C3560; display:block"></span>
+                <span style="position:absolute; left:40%; bottom:22%; width:40%; height:100%; border-radius:50%; background:#1C3560; display:block"></span>
+              </div>
+              <div style="position:absolute; left:-4%; bottom:10%; width:30%; height:13%; opacity:.45">
+                <span style="position:absolute; left:0; bottom:0; width:100%; height:45%; border-radius:40px; background:#1A4A44; display:block"></span>
+                <span style="position:absolute; left:22%; bottom:24%; width:36%; height:95%; border-radius:50%; background:#1A4A44; display:block"></span>
+                <span style="position:absolute; left:50%; bottom:20%; width:28%; height:70%; border-radius:50%; background:#1A4A44; display:block"></span>
+              </div>
+              <div style="position:absolute; right:-5%; bottom:16%; width:30%; height:12%; opacity:.4">
+                <span style="position:absolute; left:0; bottom:0; width:100%; height:45%; border-radius:40px; background:#1A4A44; display:block"></span>
+                <span style="position:absolute; left:16%; bottom:22%; width:32%; height:80%; border-radius:50%; background:#1A4A44; display:block"></span>
+                <span style="position:absolute; left:42%; bottom:24%; width:40%; height:100%; border-radius:50%; background:#1A4A44; display:block"></span>
+              </div>
+              <span style="position:absolute; left:30%; top:8%; width:3px; height:3px; border-radius:50%; background:#fff; opacity:.5; display:block"></span>
+              <span style="position:absolute; left:72%; top:22%; width:2px; height:2px; border-radius:50%; background:#fff; opacity:.45; display:block"></span>
+              <span style="position:absolute; left:12%; top:36%; width:2px; height:2px; border-radius:50%; background:#fff; opacity:.4; display:block"></span>
+              <span style="position:absolute; left:88%; top:40%; width:3px; height:3px; border-radius:50%; background:#fff; opacity:.35; display:block"></span>
+              <div style="position:absolute; left:7%; top:7%; width:86%; height:86%; z-index:2; border-radius:10px; background:#F4F1EC; overflow:hidden; box-shadow:0 30px 50px -18px rgba(0,8,25,0.75), 0 0 0 1px rgba(255,255,255,0.08); display:flex; flex-direction:column">
+                <div style="height:6%; min-height:14px; display:flex; align-items:center; gap:5px; padding:0 2.5%; background:#E6E1D8; flex-shrink:0">
+                  <span style="width:7px; height:7px; border-radius:50%; background:#E26B5A; display:block"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#E8B64A; display:block"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#5FB572; display:block"></span>
+                  <span style="flex:1; height:50%; margin-left:6%; margin-right:14%; border-radius:4px; background:#F4F1EC; display:block"></span>
+                </div>
+                <div style="flex:1; position:relative; overflow:hidden; background:#0A1A33">
+                  <sc-for list="{{ c.deskSlides }}" as="s" hint-placeholder-count="0">
+                    <div style="position:absolute; inset:0; background:{{ s.bg }}; opacity:{{ s.op }}; transform:translateX({{ s.x }}); transition:opacity .7s ease, transform .8s cubic-bezier(.4,0,.2,1)"></div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ c.isFtd }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; background:#F3EEE4"></div>
+              <div style="position:absolute; left:-2%; top:-4%; width:104%; height:108%; display:grid; grid-template-columns:repeat(10,1fr); grid-template-rows:repeat(6,1fr); gap:1.4%; opacity:.32; transform:rotate(-6deg) scale(1.08)"><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#F2D98A; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#A8D8A0; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#F2D98A; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#F2D98A; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#A8D8A0; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F2D98A; border-radius:3px; display:block"></span><span style="background:#A8D8A0; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#F2D98A; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#F7C59F; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#C9B6E4; border-radius:3px; display:block"></span><span style="background:#A8D8A0; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span><span style="background:#7ED3C6; border-radius:3px; display:block"></span><span style="background:#F4A6B8; border-radius:3px; display:block"></span></div>
+              <div style="position:absolute; inset:0; background:radial-gradient(ellipse 60% 55% at 58% 48%, rgba(243,238,228,0.9), rgba(243,238,228,0.2) 70%, transparent)"></div>
+              <div style="position:absolute; left:8%; top:9%; width:84%; height:82%; z-index:2; border-radius:10px; background:#F4F1EC; overflow:hidden; box-shadow:0 28px 46px -18px rgba(28,20,16,0.4), 0 0 0 1px rgba(28,20,16,0.08); display:flex; flex-direction:column">
+                <div style="height:6.5%; min-height:14px; display:flex; align-items:center; gap:5px; padding:0 2.5%; background:#E6E1D8; flex-shrink:0">
+                  <span style="width:7px; height:7px; border-radius:50%; background:#E26B5A; display:block"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#E8B64A; display:block"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#5FB572; display:block"></span>
+                  <span style="flex:1; height:50%; margin-left:6%; margin-right:14%; border-radius:4px; background:#F4F1EC; display:block"></span>
+                </div>
+                <div style="flex:1; position:relative; overflow:hidden; background:#fff">
+                  <video src="assets/cases/ftd/proto-ftd-1.mp4" poster="assets/cases/ftd/poster-ftd-1.jpg" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" data-hover-video="1" style="position:absolute; left:0; top:-15.2%; width:100%; height:115.2%; object-fit:cover; object-position:center top; display:block"></video>
+                </div>
+              </div>
+              <div style="position:absolute; inset:0; z-index:5; background:url('assets/cases/ftd/thumb-ftd.png?v=4') center / cover no-repeat, #F3EEE4; opacity:{{ c.coverOp }}; transition:opacity .5s ease"></div>
+            </sc-if>
+            <sc-if value="{{ c.multi }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; left:0; right:0; bottom:8px; display:flex; justify-content:center; gap:2px; z-index:5" onMouseLeave="{{ c.dotsLeave }}">
+                <sc-for list="{{ c.dots }}" as="d" hint-placeholder-count="0">
+                  <span onMouseEnter="{{ d.go }}" onClick="{{ d.click }}" style="padding:6px 3px; display:block; cursor:none">
+                    <span style="height:6px; width:{{ d.w }}; border-radius:6px; background:#fff; opacity:{{ d.op }}; box-shadow:0 1px 4px rgba(0,0,0,0.35); transition:width .35s ease, opacity .35s ease; display:block"></span>
+                  </span>
+                </sc-for>
+              </div>
             </sc-if>
           </div>
           <div style="padding:28px; display:flex; flex-direction:column; flex:1">
@@ -314,7 +395,55 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;pt&quot;,&quot;es&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'pt' | 'es'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;customCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
 class Component extends DCLogic {
-  state = { lang: this.props.lang || 'en', active: 'home', hovered: null, hoveredArt: null };
+  state = { lang: this.props.lang || 'en', active: 'home', hovered: null, hoveredArt: null, caseHover: null, ks: {} }
+
+  setK(ci, k) {
+    this.setState(s => ({ ks: Object.assign({}, s.ks, { [ci]: k }) }));
+  }
+
+  getK(ci) {
+    return (this.state.ks || {})[ci] || 0;
+  }
+
+  runSlides(ci, n, first) {
+    clearTimeout(this.slideT);
+    if (n < 2) return;
+    const tick = (delay) => { this.slideT = setTimeout(() => {
+      if (this.state.caseHover !== ci) return;
+      this.setK(ci, this.getK(ci) + 1);
+      tick(2200);
+    }, delay); };
+    tick(first);
+  }
+
+  startSlides(ci, n) {
+    this.slideN = n;
+    this.setState({ caseHover: ci });
+    this.runSlides(ci, n, 650);
+  }
+
+  goSlide(ci, j, n) {
+    clearTimeout(this.slideT);
+    if (this.state.caseHover !== ci) this.setState({ caseHover: ci });
+    const k = this.getK(ci);
+    const delta = (((j - k) % n) + n) % n;
+    if (delta) this.setK(ci, k + delta);
+  }
+
+  resumeSlides(ci, n) {
+    if (this.state.caseHover === ci) this.runSlides(ci, n, 1400);
+  }
+
+  stopSlides() {
+    clearTimeout(this.slideT);
+    const ci = this.state.caseHover;
+    const n = this.slideN || 0;
+    this.setState({ caseHover: null });
+    if (ci == null || n < 2) return;
+    const k = this.getK(ci);
+    const rest = ((k % n) + n) % n;
+    if (rest) this.setK(ci, k + (n - rest));
+  }
 
   setLang(l) {
     try { localStorage.setItem('nai-lang', l); } catch (e) {}
@@ -353,6 +482,7 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.slideT);
     document.removeEventListener('mousemove', this.onMove);
     if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
     cancelAnimationFrame(this.raf);
@@ -444,10 +574,10 @@ class Component extends DCLogic {
           { name: 'HTML & JavaScript', sub: 'Prototyping in code', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=4', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign and refresh of digital education products — from learning collections to interactive experiences.', tags: ['Design System', 'Figma Variables', 'Accessibility'] },
-          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=4', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Gamified education products that broaden access to technology for low-income communities.', tags: ['Design System', 'Gamification', 'AI'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'Mobile app to track trucks and issue an invoice at every refuel in Peru, simplifying expense reports.', tags: ['Design System', 'UX Research', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Self-service kiosk and white-label finance app, adaptable to multiple brands.', tags: ['Design System', 'Information Architecture', 'Mobile'] }
+          { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Current · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign and refresh of digital education products — from learning collections to interactive experiences.', tags: ['Design System', 'Figma Variables', 'Accessibility'] },
+          { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Gamified education products that broaden access to technology for low-income communities.', tags: ['Design System', 'Gamification', 'AI'] },
+          { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Self-service kiosk and white-label finance app, adaptable to multiple brands.', tags: ['Design System', 'Information Architecture', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logistics · B2B · SaaS', name: 'Ontruck', desc: 'Mobile app to track trucks and issue an invoice at every refuel in Peru, simplifying expense reports.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Decorative piece — Mindful Love', 'Painted canvas & fuzzy Christmas tree', 'Cold porcelain pendants', 'Wall mandala', '“Girl power” glasses case', 'Galaxy glasses case', '“Intention & Presence” mural', '“Intuition” keychain', 'Figgy — Figma mascot illustration', 'Bridesmaid jewelry box', 'Canvas — “Love is a choice”', 'Maternity plaque', '“Blessed You Are” plaque', '“Citrino Branding” glasses case', 'Geek coasters', 'Cute coaster', 'Blue-print necklace'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psychology × Design', 'Accessibility WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -491,10 +621,10 @@ class Component extends DCLogic {
           { name: 'HTML & JavaScript', sub: 'Prototipado en código', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=4', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Rediseño y actualización de productos educativos digitales — de acervos didácticos a experiencias interactivas.', tags: ['Design System', 'Figma Variables', 'Accesibilidad'] },
-          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=4', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Productos educativos gamificados que amplían el acceso a la tecnología de personas de bajos ingresos.', tags: ['Design System', 'Gamificación', 'IA'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App móvil para rastrear camiones y emitir factura en cada carga de combustible en Perú, simplificando la rendición de cuentas.', tags: ['Design System', 'UX Research', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Tótem de autoservicio y app financiera white label, adaptable a múltiples marcas.', tags: ['Design System', 'Arquitectura de Información', 'Mobile'] }
+          { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Actual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Rediseño y actualización de productos educativos digitales — de acervos didácticos a experiencias interactivas.', tags: ['Design System', 'Figma Variables', 'Accesibilidad'] },
+          { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Productos educativos gamificados que amplían el acceso a la tecnología de personas de bajos ingresos.', tags: ['Design System', 'Gamificación', 'IA'] },
+          { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Tótem de autoservicio y app financiera white label, adaptable a múltiples marcas.', tags: ['Design System', 'Arquitectura de Información', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App móvil para rastrear camiones y emitir factura en cada carga de combustible en Perú, simplificando la rendición de cuentas.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Pieza decorativa — Amor Consciente', 'Lienzos y árbol de Navidad peludo', 'Colgantes de porcelana fría', 'Mandala en la pared', 'Funda de gafas "girl power"', 'Funda de gafas galaxia', 'Mural "Intención y Presencia"', 'Llavero "Intuición"', 'Ilustración de la mascota Figgy', 'Joyero para madrinas', 'Lienzo — "El amor es una elección"', 'Placa de maternidad', 'Placa "Bendecida Eres"', 'Funda de gafas "Branding Citrino"', 'Portavasos geek', 'Portavasos bonito', 'Collar con estampado azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicología × Diseño', 'Accesibilidad WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -538,10 +668,10 @@ class Component extends DCLogic {
           { name: 'HTML & JavaScript', sub: 'Prototipação em código', dot: '#E8909D' }
         ],
         cases: [
-          { href: 'case-studies.html#ftd', img: 'assets/cases/ftd/thumb-ftd.png?v=4', reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign e atualização de produtos digitais de educação — de acervos didáticos a experiências interativas.', tags: ['Design System', 'Figma Variables', 'Acessibilidade'] },
-          { href: 'case-studies.html#zup', img: 'assets/cases/zup/thumb-zup.png?v=4', reveal: 'right', emoji: '⚡', thumb: 'linear-gradient(135deg,#1a0a0f 0%,#3d1020 50%,#2d0a18 100%)', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Produtos educacionais gamificados que ampliam o acesso de pessoas de baixa renda à tecnologia.', tags: ['Design System', 'Gamificação', 'IA'] },
-          { href: '#', reveal: 'left', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App mobile para rastrear caminhões e emitir nota fiscal a cada abastecimento no Peru, simplificando a prestação de contas.', tags: ['Design System', 'UX Research', 'Mobile'] },
-          { href: '#', reveal: 'right', emoji: '💳', thumb: 'linear-gradient(135deg,#2e1a0a,#503214)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Totem de autoatendimento e app financeiro white label, adaptável a múltiplas marcas.', tags: ['Design System', 'Arquitetura da Informação', 'Mobile'] }
+          { href: 'case-studies.html#ftd', ftdMock: true, reveal: 'left', emoji: '⚗️', thumb: 'linear-gradient(135deg,#0a1a2e,#1a2e50)', eyebrow: 'Atual · EdTech', name: 'FTD Educação', client: 'Grupo Marista', desc: 'Redesign e atualização de produtos digitais de educação — de acervos didáticos a experiências interativas.', tags: ['Design System', 'Figma Variables', 'Acessibilidade'] },
+          { href: 'case-studies.html#zup', desktop: ['assets/cases/zup/flow-journey-map.jpg', 'assets/cases/zup/ui-codahub-home.jpg', 'assets/cases/zup/ui-educators.jpg'], reveal: 'right', emoji: '⚡', thumb: '#0A1A33', eyebrow: '2024–2025 · EdTech', name: 'Zup Innovation', client: 'Itaú', desc: 'Produtos educacionais gamificados que ampliam o acesso de pessoas de baixa renda à tecnologia.', tags: ['Design System', 'Gamificação', 'IA'] },
+          { href: '#', screens: [{ src: 'assets/cases/mob4pay/screen-01.png' }, { src: 'assets/cases/mob4pay/screen-02.png' }, { src: 'assets/cases/mob4pay/screen-03.png' }], reveal: 'left', emoji: '💳', thumb: 'linear-gradient(135deg,#1853CA,#063FB2)', eyebrow: 'FinTech · B2C', name: 'Mob4pay', desc: 'Totem de autoatendimento e app financeiro white label, adaptável a múltiplas marcas.', tags: ['Design System', 'Arquitetura da Informação', 'Mobile'] },
+          { href: '#', reveal: 'right', emoji: '🚚', thumb: 'linear-gradient(135deg,#0a2e1a,#1a5032)', eyebrow: 'Logística · B2B · SaaS', name: 'Ontruck', desc: 'App mobile para rastrear caminhões e emitir nota fiscal a cada abastecimento no Peru, simplificando a prestação de contas.', tags: ['Design System', 'UX Research', 'Mobile'] }
         ],
         artCaptions: ['Quadro decorativo - Amor Ciente', 'Telas e árvore de natal felpuda', 'Pingentes de cerâmica fria', 'Mandala na parede', 'Porta óculos girl power', 'Porta óculos galáxia', 'Mural Intenção y Presença', 'Porta-chaves Intuição', 'Ilustra mascote Figgy', 'Porta joias para madrinhas', 'Tela - O amor é uma escolha', 'Placa de maternidade', 'Quadrinho Abençoada És', 'Porta óculos Branding Citrino', 'Porta copos geek', 'Porta-copos fofo', 'Colar estampa azul'],
         marquee: ['Product Design', 'Design Systems', 'UX Research', 'Figma Expert', 'Psicologia × Design', 'Acessibilidade WCAG AAA', 'EdTech · FinTech · SaaS'],
@@ -555,9 +685,44 @@ class Component extends DCLogic {
     const t = this.copy()[lang] || this.copy().en;
     const artFiles = ['assets/art-13.jpg', 'assets/art-02.jpg', 'assets/art-03.jpg', 'assets/art-05.jpg', 'assets/art-06.jpg', 'assets/art-12.jpg', 'assets/art-09.jpg', 'assets/art-10.jpg', 'assets/art-07.png', 'assets/art-14.jpg', 'assets/art-15.jpg', 'assets/art-16.jpg', 'assets/art-18.jpg', 'assets/art-19.jpg', 'assets/art-01.jpg', 'assets/art-08.jpg', 'assets/art-11.jpg'];
     const artDots = ['#8B1A2E', '#F0C93A', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#E8909D', '#E8909D', '#F0C93A', '#F0C93A', '#8B1A2E', '#F0C93A', '#E8909D', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E', '#8B1A2E'];
-    const cases = t.cases.map((c) => Object.assign({}, c, {
-      noImg: !c.img,
-      thumb: c.img ? 'url("' + c.img + '") center / cover no-repeat, ' + c.thumb : c.thumb,
+    const cases = t.cases.map((c, ci) => {
+      const screens = c.screens || null;
+      const desk = c.desktop || null;
+      const imgs = screens || desk ? [] : (c.imgs || (c.img ? [c.img] : []));
+      const count = screens ? screens.length : desk ? desk.length : imgs.length;
+      const k = (this.state.ks || {})[ci] || 0;
+      const cur = count ? ((k % count) + count) % count : 0;
+      const SLOT = {
+        c: { left: '35.1%', top: '10%', w: '29.9%', h: '81.5%', z: 4, b: 1, op: 1 },
+        r: { left: '57.7%', top: '18.5%', w: '25.5%', h: '69.6%', z: 3, b: 0.78, op: 1 },
+        l: { left: '16.8%', top: '18.5%', w: '25.5%', h: '69.6%', z: 3, b: 0.78, op: 1 },
+        or: { left: '74%', top: '25%', w: '20%', h: '55%', z: 2, b: 0.6, op: 0 },
+        ol: { left: '6%', top: '25%', w: '20%', h: '55%', z: 2, b: 0.6, op: 0 },
+        h: { left: '40%', top: '25%', w: '20%', h: '55%', z: 0, b: 0.6, op: 0 }
+      };
+      return Object.assign({}, c, {
+      noImg: !count && !c.ftdMock,
+      isFtd: !!c.ftdMock,
+      coverOp: this.state.caseHover === ci ? 0 : 1,
+      multi: count > 1,
+      isPhones: !!screens,
+      phones: (screens ? screens.concat(screens) : []).map((s, j, all) => {
+        const N = all.length;
+        let d = (((j - k) % N) + N) % N;
+        if (d > count - 1) d -= N;
+        const r = d === 0 ? SLOT.c : d === 1 ? SLOT.r : d === -1 ? SLOT.l : d >= 2 ? SLOT.or : d === -2 ? SLOT.ol : SLOT.h;
+        return Object.assign({}, r, { bg: 'url("' + s.src + '") ' + (s.pos || 'top') + ' / cover no-repeat, #fff' });
+      }),
+      isDesktop: !!desk,
+      deskSlides: (desk || []).map((src, j) => {
+        const d = (((j - cur) % count) + count) % count;
+        return { bg: 'url("' + src + '") top center / cover no-repeat', op: d === 0 ? 1 : 0, x: d === 0 ? '0%' : d === 1 ? '6%' : '-6%' };
+      }),
+      slides: imgs.map((src, j) => ({ bg: 'url("' + src + '") center / contain no-repeat', op: j === cur ? 1 : 0 })),
+      dots: Array.from({ length: count }, (_, j) => ({ w: j === cur ? '18px' : '6px', op: j === cur ? 1 : 0.6, go: () => this.goSlide(ci, j, count), click: (e) => { e.preventDefault(); e.stopPropagation(); this.goSlide(ci, j, count); } })),
+      dotsLeave: () => this.resumeSlides(ci, count),
+      enter: (e) => { this.startSlides(ci, count); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.muted = true; v.loop = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }); },
+      leave: (e) => { this.stopSlides(); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.pause(); }); },
       tags: c.tags.map((label) => {
         const pink = label.endsWith('*');
         const clean = pink ? label.slice(0, -1) : label;
@@ -565,7 +730,8 @@ class Component extends DCLogic {
           ? { label: clean, bg: '#FDE8EC', border: '#F2B8C0', color: '#8B1A2E' }
           : { label: clean, bg: 'transparent', border: 'rgba(28,20,16,0.1)', color: '#8A7A6A' };
       })
-    }));
+    });
+    });
     const active = this.state.active;
     const hovered = this.state.hovered;
     const navDefs = [
