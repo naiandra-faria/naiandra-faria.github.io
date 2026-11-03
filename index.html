@@ -294,7 +294,7 @@
                   <span style="flex:1; height:50%; margin-left:6%; margin-right:14%; border-radius:4px; background:#F4F1EC; display:block"></span>
                 </div>
                 <div style="flex:1; position:relative; overflow:hidden; background:#fff">
-                  <video src="assets/cases/ftd/proto-ftd-1.mp4" poster="assets/cases/ftd/poster-ftd-1.jpg" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" data-hover-video="1" style="position:absolute; left:0; top:-15.2%; width:100%; height:115.2%; object-fit:cover; object-position:center top; display:block"></video>
+                  <video src="assets/cases/ftd/proto-ftd-1.mp4" onPlaying="{{ c.vPlaying }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" data-hover-video="1" style="position:absolute; left:0; top:-15.2%; width:100%; height:115.2%; object-fit:cover; object-position:center top; display:block"></video>
                 </div>
               </div>
               <div style="position:absolute; inset:0; z-index:5; background:url('assets/cases/ftd/thumb-ftd.png?v=4') center / cover no-repeat, #F3EEE4; opacity:{{ c.coverOp }}; transition:opacity .5s ease"></div>
@@ -703,7 +703,8 @@ class Component extends DCLogic {
       return Object.assign({}, c, {
       noImg: !count && !c.ftdMock,
       isFtd: !!c.ftdMock,
-      coverOp: this.state.caseHover === ci ? 0 : 1,
+      coverOp: this.state.caseHover === ci && this.state.vPlay === ci ? 0 : 1,
+      vPlaying: () => { if (this.state.caseHover === ci) this.setState({ vPlay: ci }); },
       multi: count > 1,
       isPhones: !!screens,
       phones: (screens ? screens.concat(screens) : []).map((s, j, all) => {
@@ -722,7 +723,7 @@ class Component extends DCLogic {
       dots: Array.from({ length: count }, (_, j) => ({ w: j === cur ? '18px' : '6px', op: j === cur ? 1 : 0.6, go: () => this.goSlide(ci, j, count), click: (e) => { e.preventDefault(); e.stopPropagation(); this.goSlide(ci, j, count); } })),
       dotsLeave: () => this.resumeSlides(ci, count),
       enter: (e) => { this.startSlides(ci, count); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.muted = true; v.loop = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }); },
-      leave: (e) => { this.stopSlides(); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.pause(); }); },
+      leave: (e) => { this.stopSlides(); this.setState({ vPlay: null }); const el = e && e.currentTarget; if (el) el.querySelectorAll('video[data-hover-video]').forEach(v => { v.pause(); }); },
       tags: c.tags.map((label) => {
         const pink = label.endsWith('*');
         const clean = pink ? label.slice(0, -1) : label;
